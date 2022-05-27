@@ -17,7 +17,8 @@ code {
 /* base styles */
 * {
   margin: 0;
-  font-family: "Roboto";
+  /* font-family: "Roboto"; */
+  font-family: "Quicksand";
   color: #000000;
 }
 .navbar {
