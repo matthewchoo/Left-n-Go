@@ -1,4 +1,5 @@
 //A Functional component, Navbar, it will be available throughout the whole of the site.
+
 const Navbar = () => {
     return ( 
         <nav className="navbar">
