@@ -5,7 +5,7 @@ import NotFound from './pages/NotFound';
 import Cart from './pages/Cart';
 import Login from './pages/Login';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { useAuth } from './hooks/useAuth';
+//import { useAuth } from './hooks/useAuth';
 
 function App() {
 
