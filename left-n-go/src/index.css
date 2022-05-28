@@ -32,7 +32,8 @@ code {
   background: #5297FF;
 }
 .navbar h1 {
-  color: #f1356d;
+  /* color: #f1356d; */
+  color: #000000;
 }
 .navbar .links {
   margin-left: auto;
@@ -44,7 +45,8 @@ code {
   color: #ffffff;
 }
 .navbar a:hover {
-  color: #f1356d;
+  /* color: #f1356d; */
+  color: #000000;
 }
 .content {
   /* max-width: 600px; */
@@ -52,3 +54,47 @@ code {
   margin: 40px auto;
   padding: 20px;
 }
+
+/* Login */
+.login {
+  max-width: 200px;
+  margin: 0 auto;
+  text-align: center;
+}
+.login label {
+  text-align: left;
+  display: block;
+}
+.login h2 {
+  font-size: 20px;
+  /* color: #f1356d; */
+  color: #000000;
+  margin-bottom: 0px;
+  text-align: left;
+}
+
+.login p {
+  /* color: #f1356d; */
+  color: #000000;
+  margin-bottom: 30px;
+  width: auto;
+  text-align: left;
+  font-size: 12px;
+}
+
+/* .login input, .login textarea, .login select {
+  width: 100%;
+  padding: 6px 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  display: block;
+} */
+/* .login-button {
+  background: #f1356d;
+  color: #fff;
+  border: 0;
+  padding: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+} */
