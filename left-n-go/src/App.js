@@ -1,12 +1,16 @@
 import './App.css';
 import Navbar from './Navbar';
-import Home from './Home';
-import NotFound from './NotFound';
-import Cart from './Cart';
-import Login from './Login';
+import Home from './pages/Home';
+import NotFound from './pages/NotFound';
+import Cart from './pages/Cart';
+import Login from './pages/Login';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { useAuth } from './hooks/useAuth';
 
 function App() {
+
+  // const { user } = useAuth();
+
   return (
     <Router>
       <div className="App">
