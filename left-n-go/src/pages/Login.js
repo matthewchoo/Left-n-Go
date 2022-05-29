@@ -48,7 +48,8 @@ const Login = () => {
 
         console.log(loginData);
         console.log(loginDetails);
-        //signin(loginData.email, loginData.password);
+        // signin(loginData.email, loginData.password);
+
     };
 
     const { signInWithGoogle, signInWithGitHub } = useAuth();

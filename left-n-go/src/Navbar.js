@@ -92,7 +92,7 @@
 // }
 
 import * as React from 'react';
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { useAuth } from "./hooks/useAuth";
 // import { AppBar, Box, Toolbar, Typography, IconButton, 
 //             Switch, FormControlLabel, FormGroup, MenuItem, Menu } from '@mui/material';
@@ -110,7 +110,7 @@ const Navbar = () => {
             {/* Right align */}
             <div className="links">
                 <Link to="/cart">Cart</Link>
-                { user ? <ProfileIcon /> : <Link to="/login">Sign In</Link> }
+                { user ? <><Redirect to="/home"/><ProfileIcon /></> : <Link to="/login">Sign In</Link> }
               {/* { user ? <Link to="/login">Sign In</Link> : <Link to="/notfound">TryOut</Link> } */}
               {/* <Link to="/login">Sign In</Link> */}  
             </div>
