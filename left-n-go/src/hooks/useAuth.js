@@ -19,8 +19,10 @@ import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from "../config/firebaseConfig";
 // import ( firebaseConfig ) from "../config/firebaseConfig";
 import { getAuth, GoogleAuthProvider, signInWithPopup, GithubAuthProvider, 
-    signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword, 
-    sendPasswordResetEmail, confirmPasswordReset } from "firebase/auth";
+    signOut,  } from "firebase/auth";
+
+    // signInWithEmailAndPassword, createUserWithEmailAndPassword, 
+    // sendPasswordResetEmail, confirmPasswordReset
 
 const app = initializeApp(firebaseConfig);
 

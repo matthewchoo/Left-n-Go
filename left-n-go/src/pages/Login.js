@@ -47,6 +47,7 @@ const Login = () => {
         setLoginDetails(loginData);
 
         console.log(loginData);
+        console.log(loginDetails);
         //signin(loginData.email, loginData.password);
     };
 

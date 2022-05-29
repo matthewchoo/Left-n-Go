@@ -99,8 +99,7 @@ import { useAuth } from "./hooks/useAuth";
 import ProfileIcon from './components/ProfileIcon';
 
 const Navbar = () => {
-    const { user, signOut } = useAuth();
-    const { signInWithGoogle, signInWithGitHub } = useAuth();
+    const { user } = useAuth();
 
     return ( 
         <nav className="navbar">
