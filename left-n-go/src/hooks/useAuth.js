@@ -18,12 +18,20 @@ import React, { useState, useEffect, useContext, createContext } from "react";
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from "../config/firebaseConfig";
 // import ( firebaseConfig ) from "../config/firebaseConfig";
-import { getAuth } from "firebase/auth";
+import { getAuth, GoogleAuthProvider, signInWithPopup, GithubAuthProvider, 
+    signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword, 
+    sendPasswordResetEmail, confirmPasswordReset } from "firebase/auth";
 
 const app = initializeApp(firebaseConfig);
 
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app);
+
+//Initialize Firebase Auth for google auth
+//const firebaseAuth = getAuth(app);
+
+const googleAuthProvider = new GoogleAuthProvider();
+const gitHubAuthProvider = new GithubAuthProvider();
 
 const authContext = createContext();
 // Provider component that wraps your app and makes auth object ...
@@ -49,6 +57,13 @@ function useProvideAuth() {
         setUser(response.user);
         return response.user;
       });
+
+    //   Firebase9 code
+    //   return signInWithEmailAndPassword(auth, email, password)
+    //   .then((response) => {
+    //     setUser(response.user);
+    //     return response.user;
+    //   });
   };
   const signup = (email, password) => {
     return auth
@@ -58,12 +73,15 @@ function useProvideAuth() {
         return response.user;
       });
   };
+//   const signout = () => {
+//     return auth
+//       .signOut()
+//       .then(() => {
+//         setUser(false);
+//       });
+//   };
   const signout = () => {
-    return auth
-      .signOut()
-      .then(() => {
-        setUser(false);
-      });
+    return signOut(auth);
   };
   const sendPasswordResetEmail = (email) => {
     return auth
@@ -79,6 +97,20 @@ function useProvideAuth() {
         return true;
       });
   };
+
+  //created a const for signInWithGoogle
+  const signInWithGoogle = () => {
+      return signInWithPopup(auth, googleAuthProvider);
+  }
+
+  const signInWithGitHub = () => {
+    return signInWithPopup(auth, gitHubAuthProvider);
+  }
+
+//   const signOut = () => {
+//     return signOut(auth);
+//   }
+
   // Subscribe to user on mount
   // Because this sets state in the callback it will cause any ...
   // ... component that utilizes this hook to re-render with the ...
@@ -102,5 +134,13 @@ function useProvideAuth() {
     signout,
     sendPasswordResetEmail,
     confirmPasswordReset,
+    signInWithGoogle,
+    signInWithGitHub,
   };
 }
+
+//Steps to doing auth 
+//1. Instantiate, import the required objects (follow firebase docs)
+//2. Create a const for signInWithProvider (Eg, signInWithGoogle)
+//3. Include the const in the return statement
+//4. Import the signIn in the signIn page

@@ -1,6 +1,7 @@
 import { IconButton, InputLabel, Input, InputAdornment, Button } from '@mui/material';
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { Visibility, VisibilityOff, Google, GitHub } from "@mui/icons-material";
 import { useState } from 'react';
+import { useAuth } from '../hooks/useAuth';
 
 const Login = () => {
     const [passValues, setPassValues] = useState({
@@ -36,14 +37,9 @@ const Login = () => {
         // console.log("setted email ," + setEmailValues.email);
     };
 
-    // const [name, setName] = useState("");
-    // onClick = (() => {
-    //     const newEmail = prompt("Enter your email");
-    // });
-
     function handleSubmit(event) {
         event.preventDefault();
-        
+
         const loginData = {
             email: emailValues,
             password: passValues
@@ -51,52 +47,51 @@ const Login = () => {
         setLoginDetails(loginData);
 
         console.log(loginData);
+        //signin(loginData.email, loginData.password);
     };
 
-    // const onSubmit = (data) => {
-    //     console.log(data);
-    //   };
+    const { signInWithGoogle, signInWithGitHub } = useAuth();
 
 return (
 	<div
 	className="login">
     
-    <h2>Welcome Back</h2>
-    <p>Login with your email & password</p>
+        <h2>Welcome Back</h2>
+        <p>Login with your email & password</p>
 
-    <form onSubmit={handleSubmit}>
-        {/* For Email */}
-        <InputLabel htmlFor="email">
-            Enter your Email
-        </InputLabel>
-        <Input sx={{width:'25ch'}}
-            // type={emailValues.showPassword ? "text" : "password"}
-            //Upon onChange event, the email is setted.
-            onChange={handleEmailChange("email")}
-            value={emailValues.email}
-        />
+        <form onSubmit={handleSubmit}>
+            {/* For Email */}
+            <InputLabel htmlFor="email" style={{fontSize: "15px"}}>
+                Enter your Email
+            </InputLabel>
+            <Input sx={{width:'25ch'}}
+                // type={emailValues.showPassword ? "text" : "password"}
+                //Upon onChange event, the email is setted.
+                onChange={handleEmailChange("email")}
+                value={emailValues.email}
+            />
 
-        {/* For Password */}
-        <InputLabel htmlFor="standard-adornment-password">
-            Enter your Password
-        </InputLabel>
-        <Input sx={{width:'25ch'}} style={{
-            marginBottom: "30px",
-        }}
-            type={passValues.showPassword ? "text" : "password"}
-            onChange={handlePasswordChange("password")}
-            value={passValues.password}
-            endAdornment={
-            <InputAdornment position="end">
-                <IconButton
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                >
-                {passValues.showPassword ? <Visibility /> : <VisibilityOff />}
-                </IconButton>
-            </InputAdornment>
-            }
-        />
+            {/* For Password */}
+            <InputLabel htmlFor="standard-adornment-password" style={{fontSize: "15px"}}>
+                Enter your Password
+            </InputLabel>
+            <Input sx={{width:'25ch'}} style={{
+                marginBottom: "30px",
+            }}
+                type={passValues.showPassword ? "text" : "password"}
+                onChange={handlePasswordChange("password")}
+                value={passValues.password}
+                endAdornment={
+                <InputAdornment position="end">
+                    <IconButton
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    >
+                    {passValues.showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                </InputAdornment>
+                }
+            />
             <div><Button sx={{width:'29ch'}} 
             style={
                 {
@@ -123,6 +118,45 @@ return (
                 }}>Login with other methods</p>
             </div>
         </form>
+
+        <div style={{marginBottom: "10px"}}>
+            <Button sx={{width:'29ch'}} 
+            style={
+                {
+                    // background: "#f1356d",
+                    background: "#5297FF",
+                    color: "#fff",
+                    border: "0",
+                    padding: "8px",
+                    borderRadius: "10px",
+                    cursor: "pointer",
+                }
+            } 
+            color="primary"
+            startIcon={<Google style={{fill: 'white'}}/>}
+            onClick={signInWithGoogle}
+            >Sign in With Google</Button>
+        </div>
+        
+        <div style={{marginBottom: "10px"}}>
+        <Button sx={{width:'29ch'}} 
+            style={
+                {
+                    // background: "#f1356d",
+                    background: "#5297FF",
+                    color: "#fff",
+                    border: "0",
+                    padding: "8px",
+                    borderRadius: "10px",
+                    cursor: "pointer",
+                }
+            } 
+            color="primary"
+            startIcon={<GitHub style={{fill: 'white'}}/>}
+            onClick={signInWithGitHub}
+            >Sign in With GitHub</Button>
+        </div>
+
 	</div>
     
 );
@@ -153,3 +187,7 @@ export default Login;
 // 	}}
 // 	></div>
 
+    // const [name, setName] = useState("");
+    // onClick = (() => {
+    //     const newEmail = prompt("Enter your email");
+    // });

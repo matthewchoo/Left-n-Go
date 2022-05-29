@@ -4,7 +4,9 @@ import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import Cart from './pages/Cart';
 import Login from './pages/Login';
+import Logout from './pages/Logout';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+// import { Logout } from '@mui/icons-material';
 //import { useAuth } from './hooks/useAuth';
 
 function App() {
@@ -28,6 +30,9 @@ function App() {
             </Route>
             <Route path="/login">
               <Login />
+            </Route>
+            <Route path="/logout">
+              <Logout />
             </Route>
             
             <Route path="*"> {/* Catchall Route for route that doesn't exist on top. */}
