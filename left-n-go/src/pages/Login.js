@@ -13,9 +13,9 @@ const Login = () => {
         email: "",
     });
 
-    const [loginDetails, setLoginDetails] = useState(
-        []
-    );
+    // const [loginDetails, setLoginDetails] = useState(
+    //     []
+    // );
 
     const handleClickShowPassword = () => {
         setPassValues({ ...passValues, showPassword: !passValues.showPassword });
@@ -40,19 +40,30 @@ const Login = () => {
     function handleSubmit(event) {
         event.preventDefault();
 
-        const loginData = {
-            email: emailValues,
-            password: passValues
-        }
-        setLoginDetails(loginData);
+        // const loginData = {
+        //     email: emailValues,
+        //     password: passValues
+        // }
+        // setLoginDetails(loginData);
 
-        console.log(loginData);
-        console.log(loginDetails);
+        // signin(emailValues.email, passValues.password);
+
+        signin(emailValues.email, passValues.password);
+        // console.log(emailValues.email);
+        // console.log(passValues.password);
+        // console.log(loginData);
+        // console.log(loginDetails);
         // signin(loginData.email, loginData.password);
-
     };
 
-    const { signInWithGoogle, signInWithGitHub } = useAuth();
+    // function handleRegister(event) {
+    //     event.preventDefault();
+
+    //     signup(emailValues.email, passValues.password);
+    // };
+
+    const { signin, signInWithGoogle, signInWithGitHub } = useAuth();
+    // signup, 
 
 return (
 	<div
@@ -105,7 +116,7 @@ return (
                     borderRadius: "10px",
                     cursor: "pointer",
                 }
-            } 
+            }
             type="submit"
             >Login</Button></div>
 

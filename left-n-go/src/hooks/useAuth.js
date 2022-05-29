@@ -19,7 +19,7 @@ import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from "../config/firebaseConfig";
 // import ( firebaseConfig ) from "../config/firebaseConfig";
 import { getAuth, GoogleAuthProvider, signInWithPopup, GithubAuthProvider, 
-    signOut,  } from "firebase/auth";
+    signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword  } from "firebase/auth";
 
     // signInWithEmailAndPassword, createUserWithEmailAndPassword, 
     // sendPasswordResetEmail, confirmPasswordReset
@@ -53,27 +53,35 @@ function useProvideAuth() {
   // Wrap any Firebase methods we want to use making sure ...
   // ... to save the user to state.
   const signin = (email, password) => {
-    return auth
-      .signInWithEmailAndPassword(email, password)
-      .then((response) => {
-        setUser(response.user);
-        return response.user;
-      });
-
-    //   Firebase9 code
-    //   return signInWithEmailAndPassword(auth, email, password)
+    // return auth
+    //   .signInWithEmailAndPassword(email, password)
     //   .then((response) => {
     //     setUser(response.user);
     //     return response.user;
     //   });
+
+      // Firebase9 code
+    return signInWithEmailAndPassword(auth, email, password)
+    
+    // .then((response) => {
+    //   setUser(response.user);
+    //   return response.user;
+    // })
+    // .catch((error) => {
+    //   const errorCode = error.code;
+    //   const errorMessage = error.message;
+    //   console.log(errorCode)
+    //   console.log(errorMessage)
+    // });
   };
   const signup = (email, password) => {
-    return auth
-      .createUserWithEmailAndPassword(email, password)
-      .then((response) => {
-        setUser(response.user);
-        return response.user;
-      });
+    // return auth
+    //   .createUserWithEmailAndPassword(email, password)
+    //   .then((response) => {
+    //     setUser(response.user);
+    //     return response.user;
+    //   });
+    return createUserWithEmailAndPassword(auth, email, password)
   };
 //   const signout = () => {
 //     return auth
