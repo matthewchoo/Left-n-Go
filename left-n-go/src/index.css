@@ -82,6 +82,13 @@ code {
   font-size: 12px;
 }
 
+.home, .cart {
+  /* max-width: 1400px; */
+  width: 80%;
+  margin: 0 auto;
+  text-align: center;
+}
+
 /* .login input, .login textarea, .login select {
   width: 100%;
   padding: 6px 10px;

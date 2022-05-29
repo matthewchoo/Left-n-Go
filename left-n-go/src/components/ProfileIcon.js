@@ -49,7 +49,7 @@ function ProfileIcon() {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <Link to="/" style={{textDecoration:"none"}}><MenuItem onClick={handleClose}>Profile</MenuItem></Link>
+                {/* <Link to="/" style={{textDecoration:"none"}}><MenuItem onClick={handleClose}>Profile</MenuItem></Link> */}
                 <Link to="/logout" style={{textDecoration:"none"}}><MenuItem onClick={signout}>Sign Out</MenuItem></Link>
               </Menu>
               </>
