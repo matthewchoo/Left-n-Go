@@ -1,10 +1,4 @@
-# To be edited. 
-
-## Edited via Visual Studio (Test)
-Hello
-
-## Trying out from Git
-Just trying out 
+# This product is WIP 
 
 ## Some Tips
 1. Please remember to cd (change directory) into left-n-go <b>"cd left-n-go"</b> before coding on the app
