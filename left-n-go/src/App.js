@@ -5,8 +5,10 @@ import NotFound from './pages/NotFound';
 import Cart from './pages/Cart';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
+//import VendorProfile from './pages/ProfileVendor';
+
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-// import { Logout } from '@mui/icons-material';
+//import { Logout } from '@mui/icons-material';
 //import { useAuth } from './hooks/useAuth';
 
 function App() {
@@ -16,7 +18,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Navbar />
+        <Navbar /> {/* Once set up, page can check if signed in, if Yes, check vendor or customer and show specific navbar*/}        
         <div className="content">
           <Switch>
             <Route exact path="/">
