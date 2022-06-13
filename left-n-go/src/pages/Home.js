@@ -1,18 +1,23 @@
+import Main from "../components/Main";
+import Basket from "../components/Basket"
+
 const Home = () => {
     return ( 
         <div className="home">
             <h2>Homepage</h2>
             <div style = {{display: "flex",flexFlow: "row nowrap"}}>
                 <div className="HeaderBox" style={{flex: 1}}>
-                    <h2 class = 'pTitle'>Products</h2>
-                    <div id='product-catalog'><h1>hi</h1></div>
+                    <div className="row">
+                        <Main></Main>
+                        <Basket></Basket>
+                    </div>
                 </div>
+
+                <script src="components.js" type="text/babel"></script>
                 
                 
                 
-                
-                
-                <div className="HeaderBox" style={{flex: 1, textAlign: "right"}}><h2>Placeholder 2 (For Cart/Checkout)</h2></div>
+    
             </div>
             {/* <p>To be Continued.</p> */}
         </div>
