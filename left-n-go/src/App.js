@@ -5,6 +5,9 @@ import NotFound from './pages/NotFound';
 import Cart from './pages/Cart';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
+import ProfileVendor from './pages/ProfileVendor';
+// import data from './data';
+
 //import VendorProfile from './pages/ProfileVendor';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
@@ -12,13 +15,15 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 //import { useAuth } from './hooks/useAuth';
 
 function App() {
-
   // const { user } = useAuth();
+
+  // const { products } = data;
 
   return (
     <Router>
       <div className="App">
         <Navbar /> {/* Once set up, page can check if signed in, if Yes, check vendor or customer and show specific navbar*/}        
+        
         <div className="content">
           <Switch>
             <Route exact path="/">
@@ -35,6 +40,9 @@ function App() {
             </Route>
             <Route path="/logout">
               <Logout />
+            </Route>
+            <Route path="/vendorProfile">
+              <ProfileVendor />
             </Route>
             
             <Route path="*"> {/* Catchall Route for route that doesn't exist on top. */}
