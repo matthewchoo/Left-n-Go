@@ -17,6 +17,12 @@ const data = {
         name: 'W Shoes',
         price: 1000,
         image: 'https://picsum.photos/id/21/3008/2008',
+    },
+    {
+        id: '3',
+        name: 'We Shoes',
+        price: 10030,
+        image: 'https://picsum.photos/id/21/3008/2008',
     }
     ],
 };

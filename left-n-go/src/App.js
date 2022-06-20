@@ -6,6 +6,7 @@ import Cart from './pages/Cart';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
 import ProfileVendor from './pages/ProfileVendor';
+import HomeVendor from './pages/HomeVendor'
 // import data from './data';
 
 //import VendorProfile from './pages/ProfileVendor';
@@ -43,6 +44,9 @@ function App() {
             </Route>
             <Route path="/vendorProfile">
               <ProfileVendor />
+            </Route>
+            <Route path="/HomeVendor">
+              <HomeVendor />
             </Route>
             
             <Route path="*"> {/* Catchall Route for route that doesn't exist on top. */}

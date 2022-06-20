@@ -171,6 +171,12 @@ button.remove {
   width: 1.5rem;
 }
 
+button.orders {
+  background-color: #5297FF;
+  border: none;
+  width: 1.5rem;
+}
+
 button.badge {
   background-color: #f04040;
   border: none;
