@@ -22,7 +22,7 @@ code {
   color: #000000;
 }
 .navbar {
-  padding: 20px;
+
   display: flex;
   align-items: center;
   /* max-width: 600px; */
@@ -36,15 +36,15 @@ code {
   color: #000000;
 }
 .navbar .links {
-  margin-left: auto;
-  padding-left: 0px;
-  /* flex: auto; */
+  position: absolute;
+  right: 0px;
+  width: 200px;
 
 }
 .navbar a {
-  margin-left: 16px;
+  margin-left: 20px;
   text-decoration: none;
-  padding: 6px;
+  padding: 0px;
   color: #ffffff;
 }
 .navbar a:hover {
@@ -150,6 +150,12 @@ a {
 img.small { 
   max-height: 8rem;
 }
+
+img.icon {
+  max-height: 8rem;
+}
+
+
 
 button {
   font-size: 0.8rem;
