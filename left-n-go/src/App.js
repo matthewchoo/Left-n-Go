@@ -45,6 +45,9 @@ function App() {
             <Route path="/vendorProfile">
               <ProfileVendor />
             </Route>
+            <Route path="/addProduct">
+              <AddProduct />
+            </Route>
             <Route path="/HomeVendor">
               <HomeVendor />
             </Route>
