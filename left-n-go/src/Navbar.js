@@ -104,21 +104,24 @@ export default function Navbar(props) {
     return ( 
         <nav className="navbar">
             {/* Left align */}
-            <Link to="/home">
-            
-            <img className="icon" src='https://i.imgur.com/JclD9j8.png' alt='logo'></img> 
-            {/* <div> Left-n-Go</div> */}
-            </Link>
+            <div>
+                <Link to="/home">
+                
+                    <img className="icon" src='https://i.imgur.com/JclD9j8.png' alt='logo'></img> 
+                {/* <div> Left-n-Go</div> */}
+                </Link>
+            </div>
             {/* Can switch Left-n-Go into the Logo. */}
 
             {/* Right align */}
             <div className="links">
                 <Link to="/cart">Cart {' '}
-                {countCartItems ? ( 
-                    <button className="badge">{ countCartItems }</button>
-                ): ''}
-                </Link>
-                { user ? <><Redirect to="/home"/><ProfileIcon /></> : <Link to="/login">Sign In</Link> }
+                    {countCartItems ? ( 
+                        <button className="badge">{ countCartItems }</button>
+                    ): ''}
+                    </Link>     
+
+                    { user ? <><Redirect to="/home"/><ProfileIcon /></> : <Link to="/login">Sign In</Link> }
               {/* { user ? <Link to="/login">Sign In</Link> : <Link to="/notfound">TryOut</Link> } */}
               {/* <Link to="/login">Sign In</Link> */}  
             </div>

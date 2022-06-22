@@ -3,19 +3,127 @@ import { AttachMoney } from "@mui/icons-material";
 import { useState } from "react";
 
 
+import { deleteObject, getDownloadURL, ref, uploadBytesResumable  } from "firebase/storage";
+import { storage, saveItem } from "../config/firebaseConfig";
+
+
 const AddProduct = () => {
 
-    // const [ name, setName ] = useState('');
-    // const [ description, setDescription ] = useState('');
-    // const [ price, setPrice ] = useState('');
-    // const [ quantity, setQuantity ] = useState('');
+    const [ name, setName ] = useState('');
+    const [ description, setDescription ] = useState('');
+    const [ price, setPrice ] = useState('');
+    const [ quantity, setQuantity ] = useState('');
     
-    // const [ imageAsset, setImageAsset ] = useState(null);
+    const [ imageAsset, setImageAsset ] = useState(null);
+    const [ imageName, setImageName ] = useState('');
 
-    const [ fields, setFields ] = useState(true);
-    // const [ alertStatus, setAlertStatus ] = useState('danger');
-    // const [ msg, setMsg ] = useState(null);
+    const [ fields, setFields ] = useState(false);
+    //const [ alertStatus, setAlertStatus ] = useState('danger');
+    const [ msg, setMsg ] = useState(null);
 
+    // console.log(name + " " + description + 
+    // " " + price + " " + quantity);
+
+    const uploadImage = (e) => { 
+        const imageFile = e.target.files[0]; //Only single image
+        const storageRef = ref(storage, `Images/${Date.now()}-${imageFile.name}`); //Image Name
+        setImageName(imageFile.name);
+        const uploadTask = uploadBytesResumable(storageRef, imageFile);
+
+        uploadTask.on('state_changed', (snapshot) => {
+            //const uploadProgress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100; //Can enable this line to show progess bar
+        }, (error) => {
+            console.log(error);
+            setFields(true);
+            setMsg('Error while uploading : Try Again');
+            //setAlertStatus('danger');
+
+            setTimeout(() => {
+                setFields(false);
+            }, 4000);
+        }, () => {
+            getDownloadURL(uploadTask.snapshot.ref).then(downloadURL => {
+                setImageAsset(downloadURL);
+                setFields(true);
+                setMsg('Image uploaded successfully');
+                //setAlertStatus('success')
+
+                setTimeout(() => {
+                    setFields(false);
+                }, 2000);
+            })
+        });
+     };
+
+    const deleteImage = () => {
+
+        const deleteRef = ref(storage, imageAsset);
+        deleteObject(deleteRef).then(() => {
+            setImageAsset(null);
+            setImageName('');
+            setFields(true);
+            setMsg('Image deleted successfully');
+                //setAlertStatus('success');
+
+                setTimeout(() => {
+                    setFields(false);
+                }, 4000);
+        });
+    };
+    
+    const saveDetails = () => { 
+        try {
+            if( (!name || !description || !quantity || !price || !imageAsset ) ) {
+                setFields(true);
+                setMsg("Required fields can't be empty");
+                //setAlertStatus('danger');
+
+                setTimeout(() => {
+                    setFields(false);
+                }, 4000)
+            } else {
+                const data = {
+                    id : `${Date.now()}`,
+                    name : name,
+                    description : description,
+                    imageURL : imageAsset,
+                    quantity : quantity,
+                    price : price,
+
+                    //To add in user's email to identify and fetch data
+                }
+                saveItem(data);
+
+                setFields(true);
+                setMsg('Data uploaded successfully');
+                deleteDetails();
+                //setAlertStatus('success');
+
+                setTimeout(() => {
+                    setFields(false);
+                }, 4000);
+            }
+
+
+            } catch (error) {
+                console.log(error);
+                setFields(true);
+                setMsg('Error while uploading : Try Again');
+                //setAlertStatus('danger');
+
+                setTimeout(() => {
+                setFields(false);
+                }, 4000)
+            };
+        };
+
+    const deleteDetails = () => { 
+        setName('');
+        setImageAsset(null);
+        setDescription('');
+        setPrice('');
+        setQuantity(1);
+     }
 
     return ( 
         <div className="addProduct">
@@ -24,7 +132,7 @@ const AddProduct = () => {
         <p>Fill in your product details</p>
 
         { fields && ( 
-                <h1 style={{color: "red"}}>Alert Message </h1>
+                <h1 style={{color: "red"}} >{ msg }</h1>
         )}
 
         <form>
@@ -42,6 +150,10 @@ const AddProduct = () => {
                 placeholder="Enter Food Title" 
                 variant="outlined"
                 required
+                
+                value={ name }
+                onChange={(e) => setName(e.target.value)}
+
                 />
 
             {/* Description */}
@@ -58,6 +170,9 @@ const AddProduct = () => {
                 required
                 multiline
                 rows={3}
+
+                value={ description }
+                onChange={(e) => setDescription(e.target.value)}
                 />
 
             {/* For Qty and Price */}
@@ -73,6 +188,8 @@ const AddProduct = () => {
                         id: 'uncontrolled-native',
                         }}
                         sx={{width:'15ch'}}
+
+                        onChange={(e) => setQuantity(e.target.value)}
                     >
                         <option value={1}>1</option>
                         <option value={2}>2</option>
@@ -108,6 +225,9 @@ const AddProduct = () => {
                     variant="outlined"
                     required
                     rows={3}
+
+                    value={price} 
+                    onChange={(e) => setPrice(e.target.value)}
                     />
                 </Grid>
 
@@ -117,15 +237,32 @@ const AddProduct = () => {
 
             <div style={{flex : "flex-col"}}>
                 <h3>Upload Photos : </h3>
-                <label htmlFor='upload-photo'>
-                <input
-                    style={{ marginTop: "10px" }}
-                    id='upload-photo'
-                    name='upload-photo'
-                    type='file'
-                    required
-                />
-                </label>
+                
+                <>{
+                    imageAsset ? <>
+                        <p  style={{fontSize: "15px", 
+                            textAlign: "left"}}> 
+                            { imageName } 
+                        </p>
+
+                        <button type="button" onClick={ deleteImage }> Delete Image </button>
+                    </> : <> 
+                    <label htmlFor='upload-photo'>
+                        <input
+                            style={{ marginTop: "10px" }}
+                            id='upload-photo'
+                            name='upload-photo'
+                            type='file'
+                            required
+
+                            accept="image/*"
+
+                            onChange={ uploadImage }
+                        />
+                        </label>
+                    </>
+                }</>
+
             </div>
 
 
@@ -147,6 +284,8 @@ const AddProduct = () => {
                 }
             }
             type="submit"
+
+            onClick={ saveDetails }
             >Upload</Button></div>
 
         </form>

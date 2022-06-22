@@ -14,8 +14,9 @@
 // };
 
 import { initializeApp, getApp, getApps } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
+
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCgNmHXJorJ3s7welJS5Cx25dTokn0kKco",
@@ -33,6 +34,16 @@ const firestore = getFirestore(app);
 const storage = getStorage(app);
 
 export { app, firestore, storage };
+
+//Saving new items
+
+//If the collection is not there, will create a new collection
+export const saveItem = async (data) => {
+  await setDoc(doc(firestore, "products", `${Date.now()}`), data, { 
+    merge : true 
+  });
+};
+
 
 // Initialize Firebase
 //const app = initializeApp(firebaseConfig);
