@@ -16,11 +16,13 @@
 export const firebaseConfig = {
   apiKey: "AIzaSyCgNmHXJorJ3s7welJS5Cx25dTokn0kKco",
   authDomain: "left-n-go.firebaseapp.com",
+  databaseURL: "https://left-n-go-default-rtdb.firebaseio.com",
   projectId: "left-n-go",
   storageBucket: "left-n-go.appspot.com",
   messagingSenderId: "932667893902",
   appId: "1:932667893902:web:a1ddebc74ec1dd2cc3c1df"
 };
+
 
 // Initialize Firebase
 //const app = initializeApp(firebaseConfig);
