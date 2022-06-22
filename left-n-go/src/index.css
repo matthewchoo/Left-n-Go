@@ -37,6 +37,9 @@ code {
 }
 .navbar .links {
   margin-left: auto;
+  padding-left: 0px;
+  /* flex: auto; */
+
 }
 .navbar a {
   margin-left: 16px;
@@ -193,6 +196,48 @@ text-align: right;
   text-align: left;
 }
 
+/* AddProduct */
+.addProduct {
+  margin-top: 0;
+  max-width: 600px;
+  margin: 0 auto;
+  flex: auto;
+  text-align: center;
+  padding-left: 0%;
+}
+/* .addProduct label {
+  text-align: left;
+  display: block;
+} */
+.addProduct h2 {
+  font-size: 20px;
+  /* color: #f1356d; */
+  color: #000000;
+  margin-bottom: 0px;
+  text-align: left;
+  margin-left: 13%;
+}
+
+.addProduct p {
+  /* color: #f1356d; */
+  color: #000000;
+  /* margin-bottom: 30px; */
+  width: auto;
+  text-align: left;
+  font-size: 12px;
+  margin-left: 13%;
+  margin-bottom: 10px;
+}
+
+.addProduct form {
+  /* color: #f1356d; */
+  color: #000000;
+  /* margin-bottom: 30px; */
+  width: auto;
+  text-align: left;
+  font-size: 12px;
+  margin-left: 13%;
+}
 
 /* .login input, .login textarea, .login select {
   width: 100%;

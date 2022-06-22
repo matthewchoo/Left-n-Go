@@ -1,13 +1,31 @@
 import { InputLabel, Button, TextField, NativeSelect, Grid } from "@mui/material";
 import { AttachMoney } from "@mui/icons-material";
+import { useState } from "react";
 
 
 const AddProduct = () => {
+
+    // const [ name, setName ] = useState('');
+    // const [ description, setDescription ] = useState('');
+    // const [ price, setPrice ] = useState('');
+    // const [ quantity, setQuantity ] = useState('');
+    
+    // const [ imageAsset, setImageAsset ] = useState(null);
+
+    const [ fields, setFields ] = useState(true);
+    // const [ alertStatus, setAlertStatus ] = useState('danger');
+    // const [ msg, setMsg ] = useState(null);
+
+
     return ( 
         <div className="addProduct">
     
         <h2>Add Product</h2>
         <p>Fill in your product details</p>
+
+        { fields && ( 
+                <h1 style={{color: "red"}}>Alert Message </h1>
+        )}
 
         <form>
             {/* For Name of product */}

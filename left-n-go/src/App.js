@@ -7,11 +7,13 @@ import Login from './pages/Login';
 import Logout from './pages/Logout';
 import ProfileVendor from './pages/ProfileVendor';
 import HomeVendor from './pages/HomeVendor'
+import AddProduct from './pages/AddProduct';
 // import data from './data';
 
 //import VendorProfile from './pages/ProfileVendor';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
 //import { Logout } from '@mui/icons-material';
 //import { useAuth } from './hooks/useAuth';
 

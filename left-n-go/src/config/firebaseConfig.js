@@ -13,6 +13,10 @@
 //   appId: "1:1057582981803:web:9cfa1ea847aeb12adf0dee"
 // };
 
+import { initializeApp, getApp, getApps } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
+
 export const firebaseConfig = {
   apiKey: "AIzaSyCgNmHXJorJ3s7welJS5Cx25dTokn0kKco",
   authDomain: "left-n-go.firebaseapp.com",
@@ -23,6 +27,12 @@ export const firebaseConfig = {
   appId: "1:932667893902:web:a1ddebc74ec1dd2cc3c1df"
 };
 
+const app = getApps.length > 0 ? getApp() : initializeApp(firebaseConfig);
+
+const firestore = getFirestore(app);
+const storage = getStorage(app);
+
+export { app, firestore, storage };
 
 // Initialize Firebase
 //const app = initializeApp(firebaseConfig);
