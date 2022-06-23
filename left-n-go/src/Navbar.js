@@ -1,16 +1,13 @@
 import * as React from 'react';
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "./hooks/useAuth";
 // import { AppBar, Box, Toolbar, Typography, IconButton, 
 //             Switch, FormControlLabel, FormGroup, MenuItem, Menu } from '@mui/material';
 import ProfileIcon from './components/ProfileIcon';
-// import { useEffect } from 'react';
 
 export default function Navbar(props) {
     const { user } = useAuth();
     const { countCartItems } = props;
-
-    // useEffect();
 
     return ( 
         <nav className="navbar">
@@ -33,7 +30,7 @@ export default function Navbar(props) {
                     </Link>     
 
                     {/*  */}
-                    { user ? <><Redirect to="/home"/><ProfileIcon /></> : <Link to="/login">Sign In</Link> }
+                    { user ? <><ProfileIcon /></> : <Link to="/login">Sign In</Link> }
               {/* { user ? <Link to="/login">Sign In</Link> : <Link to="/notfound">TryOut</Link> } */}
               {/* <Link to="/login">Sign In</Link> */}  
             </div>

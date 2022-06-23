@@ -57,7 +57,7 @@ const AddProduct = () => {
 
                 setTimeout(() => {
                     setFields(false);
-                }, 0); //Originally 2000
+                }, 2000); //Originally 2000
             })
         });
      };

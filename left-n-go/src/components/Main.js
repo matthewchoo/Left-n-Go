@@ -5,7 +5,7 @@ import Product from './Product';
 export default function Main(props) {
     const {onAdd} = props;
     // console.log({products});
-    console.log(props);
+    // console.log(props);
     
     // Using database's data
     // const rows = [...Array(Math.ceil(props.products.length/3))]

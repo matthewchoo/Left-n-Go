@@ -12,16 +12,16 @@ import AddProduct from './pages/AddProduct';
 
 //import VendorProfile from './pages/ProfileVendor';
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { firestore } from './config/firebaseConfig';
 import { collection, getDocs } from 'firebase/firestore';
 
 // import { useEffect } from 'react';
 //import { Logout } from '@mui/icons-material';
-//import { useAuth } from './hooks/useAuth';
+import { useAuth } from './hooks/useAuth';
 
 function App() {
-  // const { user } = useAuth();
+  const { user } = useAuth();
 
   // const { products } = data;
 
@@ -79,7 +79,7 @@ const collectionRef = collection(firestore, "products");
               <Cart />
             </Route>
             <Route path="/login">
-              <Login />
+              { user ? <Redirect to="/home"/> : <Login /> }
             </Route>
             <Route path="/logout">
               <Logout />
