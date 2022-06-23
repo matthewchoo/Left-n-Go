@@ -32,6 +32,7 @@ function App() {
     await getItems().then((data) => {
       console.log(data);
       setDbData(data);
+      //setDbData(data);
     });
   };
 
