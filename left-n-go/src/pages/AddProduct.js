@@ -3,8 +3,9 @@ import { AttachMoney } from "@mui/icons-material";
 import { useState } from "react";
 
 
+import { doc, setDoc } from "firebase/firestore";
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable  } from "firebase/storage";
-import { storage, saveItem } from "../config/firebaseConfig";
+import { storage, firestore } from "../config/firebaseConfig";
 
 
 const AddProduct = () => {
@@ -23,6 +24,12 @@ const AddProduct = () => {
 
     // console.log(name + " " + description + 
     // " " + price + " " + quantity);
+
+    const saveItem = async (data) => {
+        await setDoc(doc(firestore, "products", `${Date.now()}`), data, { 
+          merge : true 
+        });
+    };
 
     const uploadImage = (e) => { 
         const imageFile = e.target.files[0]; //Only single image
@@ -50,7 +57,7 @@ const AddProduct = () => {
 
                 setTimeout(() => {
                     setFields(false);
-                }, 2000);
+                }, 0); //Originally 2000
             })
         });
      };
@@ -80,7 +87,7 @@ const AddProduct = () => {
 
                 setTimeout(() => {
                     setFields(false);
-                }, 4000)
+                }, 0) //4000 originally
             } else {
                 const data = {
                     id : `${Date.now()}`,
@@ -101,7 +108,7 @@ const AddProduct = () => {
 
                 setTimeout(() => {
                     setFields(false);
-                }, 4000);
+                }, 1000); //4000 originally
             }
 
 
@@ -188,6 +195,7 @@ const AddProduct = () => {
                         id: 'uncontrolled-native',
                         }}
                         sx={{width:'15ch'}}
+                        value={ quantity }
 
                         onChange={(e) => setQuantity(e.target.value)}
                     >
