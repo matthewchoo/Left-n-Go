@@ -56,3 +56,4 @@ export const getItems = async () => {
 
 // Initialize Firebase
 //const app = initializeApp(firebaseConfig);
+

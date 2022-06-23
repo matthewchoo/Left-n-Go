@@ -13,9 +13,10 @@ import AddProduct from './pages/AddProduct';
 //import VendorProfile from './pages/ProfileVendor';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { getItems } from './config/firebaseConfig';
+import { firestore } from './config/firebaseConfig';
+import { collection, getDocs } from 'firebase/firestore';
 
+// import { useEffect } from 'react';
 //import { Logout } from '@mui/icons-material';
 //import { useAuth } from './hooks/useAuth';
 
@@ -25,22 +26,39 @@ function App() {
   // const { products } = data;
 
   //To set Initial state
+  
+  
+const collectionRef = collection(firestore, "products");
 
-  const [ dbData, setDbData ] = useState(null);
-
-  const fetchData = async () => {
-    await getItems().then((data) => {
-      console.log(data);
-      setDbData(data);
-      //setDbData(data);
+  let products = [];
+  
+  getDocs(collectionRef).then((snapshot) => {
+    snapshot.docs.forEach((doc) => {
+      products.push({ ...doc.data(), id: doc.id })
     });
-  };
+    // products.forEach(product => {
+    //   console.log("IMAGE URL")
+    //   console.log(product.imageURL)
+    // })
+  }).catch(err => {
+    console.log(err.message);
+  });
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  // const fetchData = async () => {
+  //   await getItems().then((data) => {
+  //     data.forEach((doc) => {
+  //       products.push({ ...doc.data, id: doc.id })
+  //     });
+  //     console.log(data);
+  //     //setDbData(data);
+  //   });
+  // };
 
-  console.log("DBData:" + dbData);
+  // useEffect(() => {
+  //   fetchData();
+  // }, []);
+
+  // console.log("DBData:" + dbData);
 
   return (
     <Router>
@@ -50,10 +68,12 @@ function App() {
         <div className="content">
           <Switch>
             <Route exact path="/">
-              <Home />
+              <Home products={ products }/>
+              {/* <Home /> */}
             </Route>
             <Route path="/home">
-              <Home />
+              <Home products={ products }/>
+              {/* <Home /> */}
             </Route>
             <Route path="/cart">
               <Cart />

@@ -1,10 +1,25 @@
 import Main from "../components/Main";
 import Basket from "../components/Basket"
-import data from '../data';
 import { useState } from "react";
+// import { getItems } from "../config/firebaseConfig";
 
-const Home = () => {
-    const { products } = data;
+import data from '../data';
+// import { collection, getDocs } from "firebase/firestore";
+// import { firestore } from "../config/firebaseConfig";
+
+const Home = (props) => {
+
+    // let tryProducts = [];
+
+    // getItems().forEach((items) => {
+    //     tryProducts.push({...items.data(), id : items.id})
+    // });
+
+    // const products = props.products;
+    const products = data;
+    // const products = tryProducts;
+    // console.log(products)
+
     const [cartItems, setCartItems] = useState([]);
     const onAdd = (product) => {
         const exist = cartItems.find(x => x.id === product.id);
