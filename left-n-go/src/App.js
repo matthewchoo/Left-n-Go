@@ -13,6 +13,8 @@ import AddProduct from './pages/AddProduct';
 //import VendorProfile from './pages/ProfileVendor';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { getItems } from './config/firebaseConfig';
 
 //import { Logout } from '@mui/icons-material';
 //import { useAuth } from './hooks/useAuth';
@@ -21,6 +23,23 @@ function App() {
   // const { user } = useAuth();
 
   // const { products } = data;
+
+  //To set Initial state
+
+  const [ dbData, setDbData ] = useState(null);
+
+  const fetchData = async () => {
+    await getItems().then((data) => {
+      console.log(data);
+      setDbData(data);
+    });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  console.log("DBData:" + dbData);
 
   return (
     <Router>

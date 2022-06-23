@@ -14,7 +14,7 @@
 // };
 
 import { initializeApp, getApp, getApps } from "firebase/app";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { getFirestore, doc, setDoc, getDocs, query, collection, orderBy } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 
@@ -42,6 +42,15 @@ export const saveItem = async (data) => {
   await setDoc(doc(firestore, "products", `${Date.now()}`), data, { 
     merge : true 
   });
+};
+
+//Get items
+export const getItems = async () => {
+  const items = await getDocs(
+    query(collection(firestore, "products"), orderBy("id", "desc"))
+  );
+
+  return items.docs.map((doc) => doc.data());
 };
 
 
