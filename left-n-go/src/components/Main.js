@@ -8,14 +8,14 @@ export default function Main(props) {
     // console.log(props);
     
     // Using database's data
-    // const rows = [...Array(Math.ceil(props.products.length/3))]
+    const rows = [...Array(Math.ceil(props.products.length/3))]
 
-    // const productRows = rows.map ((row,idx) => props.products.slice(idx * 3, idx * 3 + 3));
+    const productRows = rows.map ((row,idx) => props.products.slice(idx * 3, idx * 3 + 3));
 
     // Using data.js's data
-    const rows = [...Array(Math.ceil(props.products.products.length/3))]
+    // const rows = [...Array(Math.ceil(props.products.products.length/3))]
 
-    const productRows = rows.map ((row,idx) => props.products.products.slice(idx * 3, idx * 3 + 3));
+    // const productRows = rows.map ((row,idx) => props.products.products.slice(idx * 3, idx * 3 + 3));
 
     const content = productRows.map((row, idx) => (
         <div className="row" key={idx}>

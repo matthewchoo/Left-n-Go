@@ -3,7 +3,7 @@ import Basket from "../components/Basket"
 import { useState } from "react";
 // import { getItems } from "../config/firebaseConfig";
 
-import data from '../data';
+// import data from '../data';
 // import { collection, getDocs } from "firebase/firestore";
 // import { firestore } from "../config/firebaseConfig";
 
@@ -15,9 +15,12 @@ const Home = (props) => {
     //     tryProducts.push({...items.data(), id : items.id})
     // });
 
-    // const products = props.products;
-    const products = data;
-    // const products = tryProducts;
+    //using database's data
+    const products = props.products;
+
+    //Using data from ../data
+    //const products = data;
+
     // console.log(products)
 
     const [cartItems, setCartItems] = useState([]);
