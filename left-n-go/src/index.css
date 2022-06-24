@@ -126,6 +126,12 @@ a {
 .row {
   display: flex;
   justify-content: space-between;
+  padding-bottom: 50px;
+}
+
+.rowBasket {
+  display: flex;
+  justify-content: space-between;
 }
 
 .col-1 {
@@ -135,6 +141,8 @@ a {
 .col-2 {
   flex:2
 }
+
+
 
 .block {
   background-color: #e0e0e0;
@@ -187,6 +195,17 @@ button.badge {
   border: none;
   color: #ffffff;
   width: 1.5rem;
+}
+
+button.block {
+  display: block;
+  width: 95%;
+  border: 10px;
+  background-color: #5297FF;
+  padding: 10px 10px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
 }
 
 .text-right {

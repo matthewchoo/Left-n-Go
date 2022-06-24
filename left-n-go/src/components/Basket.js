@@ -4,8 +4,7 @@ export default function Basket(props) {
     const {cartItems, onAdd, onRemove} = props;
     const itemsPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
     const taxPrice = itemsPrice * 0.17;
-    const shippingPrice = itemsPrice > 2000 ? 0 : 50;
-    const totalPrice = itemsPrice + taxPrice + shippingPrice;
+    const totalPrice = itemsPrice + taxPrice;
 
     return <aside className="block col-1">
         <h2>Cart Items</h2>
@@ -14,7 +13,7 @@ export default function Basket(props) {
         </div>
 
         {cartItems.map((item) => (
-            <div key={item.id} className = "row">
+            <div key={item.id} className = "rowBasket">
                 <div className="col-2 text-left">{item.name}</div>
                 <div className="col-2">
                     <button onClick={ () => onAdd(item) } className="add" >
@@ -27,10 +26,6 @@ export default function Basket(props) {
                 </div>
 
                 <div className="col-2 text-right">
-                    {/* For data.js's data */}
-                    {/* {item.qty} x ${item.price.toFixed(2)} */}
-
-                    {/* For database data */}
                     {item.qty} x ${item.price}
                 </div>
 
@@ -41,29 +36,25 @@ export default function Basket(props) {
             <>
                 <hr></hr>
 
-                <div className="row">
+                <div className="rowBasket">
                     <div className="col-2 text-left">Items Price</div>
                     <div className="col-1 text-right">${itemsPrice.toFixed(2)}</div>
                 </div>
 
-                <div className="row">
+                <div className="rowBasket">
                     <div className="col-2 text-left">Tax Price</div>
                     <div className="col-1 text-right">${taxPrice.toFixed(2)}</div>
-                </div>
-
-                <div className="row">
-                    <div className="col-2 text-left">Shipping Price</div>
-                    <div className="col-1 text-right">${shippingPrice.toFixed(2)}</div>
                 </div>
                 
                 <hr></hr>
 
-                <div className="row">
+                <div className="rowBasket">
                     <div className="col-2 text-left"><strong>Total Price</strong></div>
                     <div className="col-1 text-right"><strong>${totalPrice.toFixed(2)}</strong></div>
                 </div>
-                <div className="row">
-                    <button onClick={() => alert('Implement Checkout')}>
+
+                <div>
+                    <button className="block" onClick={() => alert('Implement Checkout')}>
                         Checkout
                     </button>
                 </div>
