@@ -1,10 +1,11 @@
 import MainVendor from "../components/MainVendor";
 import BasketVendor from "../components/BasketVendor"
-import data from '../data';
+// import data from '../data';
 
 
-const Home = () => {
-    const { products } = data;
+const Home = (props) => {
+    // const { products } = data;
+    const  products  = props.products;
 
     return ( 
         <div className="home">

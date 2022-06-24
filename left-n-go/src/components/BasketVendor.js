@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import OrdersVendor from './OrdersVendor';
 
 export default function BasketVendor(props) {
@@ -8,7 +9,7 @@ export default function BasketVendor(props) {
         <hr></hr>
         <div className="col-2 text-left">
             <button onClick={() => console.log("Add Product")} className="add">
-            +
+            <Link to="/addProduct" style={{color:'white'}}>+ </Link>
             </button> <strong>Add Product</strong>
         </div>
 

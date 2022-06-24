@@ -91,7 +91,8 @@ const collectionRef = collection(firestore, "products");
               <AddProduct />
             </Route>
             <Route path="/HomeVendor">
-              <HomeVendor />
+              <HomeVendor products={ products }/>
+              {/* <Home /> */}
             </Route>
             
             <Route path="*"> {/* Catchall Route for route that doesn't exist on top. */}
