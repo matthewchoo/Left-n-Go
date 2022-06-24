@@ -27,7 +27,11 @@ export default function Basket(props) {
                 </div>
 
                 <div className="col-2 text-right">
-                    {item.qty} x ${item.price.toFixed(2)}
+                    {/* For data.js's data */}
+                    {/* {item.qty} x ${item.price.toFixed(2)} */}
+
+                    {/* For database data */}
+                    {item.qty} x ${item.price}
                 </div>
 
             </div>
