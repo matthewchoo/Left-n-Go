@@ -8,6 +8,7 @@ import Logout from './pages/Logout';
 import ProfileVendor from './pages/ProfileVendor';
 import HomeVendor from './pages/HomeVendor'
 import AddProduct from './pages/AddProduct';
+import UpdateProduct from './pages/UpdateProduct'
 // import data from './data';
 
 //import VendorProfile from './pages/ProfileVendor';
@@ -89,6 +90,9 @@ const collectionRef = collection(firestore, "products");
             </Route>
             <Route path="/addProduct">
               <AddProduct />
+            </Route>
+            <Route path="/updateProduct">
+              <UpdateProduct products={products}/>
             </Route>
             <Route path="/HomeVendor">
               <HomeVendor products={ products }/>

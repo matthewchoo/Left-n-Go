@@ -17,7 +17,7 @@ const Home = (props) => {
 
     //using database's data
     const products = props.products;
-
+    
     //Using data from ../data
     //const products = data;
 
