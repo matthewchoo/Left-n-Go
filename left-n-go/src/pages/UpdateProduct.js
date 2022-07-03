@@ -181,7 +181,7 @@ const UpdateProduct = (props) => {
                 required
                 
                 value={ foodID }
-                onChange={(e) => setName(e.target.value)}
+                onChange={(e) => setID(e.target.value)}
 
                 />
 
