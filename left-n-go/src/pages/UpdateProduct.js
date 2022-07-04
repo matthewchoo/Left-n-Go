@@ -30,7 +30,7 @@ const UpdateProduct = (props) => {
     // " " + price + " " + quantity);
 
     const saveItem = async (data) => {
-        const sfDocRef = doc(firestore, "products", `${Date.now()}`);
+        const sfDocRef = doc(firestore, "products", data.id);
 
         try {
             await runTransaction(firestore, async (transaction ) => {
@@ -50,7 +50,23 @@ const UpdateProduct = (props) => {
 
         
     };
+/*
+    const saveItem = async (data) => {
+        
 
+        firestore.collection("Products").doc(data.foodID).set({
+            description: data.description,
+            name: data.name,
+            imageURL : data.imageURL, 
+            quantity: data.quantity, 
+            price: data.price
+        }).then(() => {
+            console.log("Document updated succesfully");
+        }).catch((err) => {
+            console.log("Error : " + err.message);
+        });
+    }
+*/
     const uploadImage = (e) => { 
         const imageFile = e.target.files[0]; //Only single image
         const storageRef = ref(storage, `Images/${Date.now()}-${imageFile.name}`); //Image Name
@@ -110,7 +126,7 @@ const UpdateProduct = (props) => {
                 }, 0) //4000 originally
             } else {
                 const data = {
-                    id : `${Date.now()}`,
+                    id : foodID,
                     name : name,
                     description : description,
                     imageURL : imageAsset,
