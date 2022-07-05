@@ -3,7 +3,7 @@ import { AttachMoney } from "@mui/icons-material";
 import { useState } from "react";
 import Display from "../components/Display";
 
-
+import { Link } from 'react-router-dom';
 import { doc, runTransaction } from "firebase/firestore";
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable  } from "firebase/storage";
 import { storage, firestore } from "../config/firebaseConfig";
@@ -357,7 +357,29 @@ const UpdateProduct = (props) => {
             type="submit"
 
             onClick={ saveDetails }
-            >Upload</Button></div>
+            >Upload</Button>
+
+            <Link to="/homeVendor">
+            <Button sx={{width:'20ch'}} 
+            style={
+                {
+                    // background: "#f1356d",
+                    marginLeft: '0.8rem',
+                    background: "#5297FF",
+                    color: "#fff",
+                    border: "0",
+                    padding: "8px",
+                    borderRadius: "10px",
+                    cursor: "pointer",
+                    marginTop: "30px"
+                }
+            }
+            type="submit"
+            >Back</Button>
+            </Link>
+            </div>
+            
+
 
         </form>
 

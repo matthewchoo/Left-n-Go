@@ -2,6 +2,7 @@ import { InputLabel, Button, TextField, NativeSelect, Grid } from "@mui/material
 import { AttachMoney } from "@mui/icons-material";
 import { useState } from "react";
 
+import { Link } from 'react-router-dom';
 
 import { doc, setDoc } from "firebase/firestore";
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable  } from "firebase/storage";
@@ -57,7 +58,7 @@ const AddProduct = () => {
 
                 setTimeout(() => {
                     setFields(false);
-                }, 2000); //Originally 2000
+                }, 0); //Originally 2000
             })
         });
      };
@@ -189,7 +190,7 @@ const AddProduct = () => {
                         Qty
                     </InputLabel>
                     <NativeSelect
-                        // defaultValue={" "}
+                        defaultValue={" "}
                         inputProps={{
                         name: 'age',
                         id: 'uncontrolled-native',
@@ -294,7 +295,28 @@ const AddProduct = () => {
             type="submit"
 
             onClick={ saveDetails }
-            >Upload</Button></div>
+            >Upload</Button>
+            
+            <Link to="/homeVendor">
+            <Button sx={{width:'20ch'}} 
+            style={
+                {
+                    // background: "#f1356d",
+                    marginLeft: '0.8rem',
+                    background: "#5297FF",
+                    color: "#fff",
+                    border: "0",
+                    padding: "8px",
+                    borderRadius: "10px",
+                    cursor: "pointer",
+                    marginTop: "30px"
+                }
+            }
+            type="submit"
+            >Back</Button>
+            </Link>
+            
+            </div>
 
         </form>
 

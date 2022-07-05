@@ -179,6 +179,11 @@ button.add {
   width: 1.5rem;
 }
 
+button.edit {
+  background-color: #b2b748;
+  width: 1.5rem;
+}
+
 button.remove {
   background-color: #f04040;
   width: 1.5rem;

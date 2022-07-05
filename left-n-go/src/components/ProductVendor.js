@@ -9,16 +9,14 @@ export default function ProductVendor(props) {
 
     return (
         <div>
-            {/* Using database's data */}
-            <img width="100px" height="100px" className="small" src={ product.imageURL } alt={product.name}></img>
-
-            {/* Using data from ../data */}
-            {/* <img className="small" src={ product.image } alt={product.name}></img> */}
-            <h3>{ product.name }</h3>
-            <div>${ product.price }</div>
+            <img className="small" src={ product.imageURL } alt={product.name}></img>
+            
+            <h3>{ product.name } / {product.id}</h3>
+            <div><strong>${ product.price }</strong></div>
+            <div><strong>Description : {product.description}</strong> </div>
         
             <div>
-                <button onClick={ () => console.log("Edit Function")}>Edit</button>
+            <strong>Quantity Left: {product.quantity}</strong>
             </div>
         </div>
     )

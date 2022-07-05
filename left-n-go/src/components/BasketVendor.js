@@ -14,8 +14,14 @@ export default function BasketVendor(props) {
         </div>
 
         <div className="col-2 text-left">
+            <button onClick={() => console.log("Edit Product")} className="edit">
+            <Link to="/updateProduct">x</Link>
+            </button> <strong>Edit Product</strong>
+        </div>
+
+        <div className="col-2 text-left">
             <button onClick={() => console.log("Remove Product")} className="remove">
-            -
+            <Link to="/deleteProduct">-</Link>
             </button> <strong>Remove Product</strong>
         </div>
 
