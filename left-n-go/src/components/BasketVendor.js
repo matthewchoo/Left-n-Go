@@ -8,21 +8,24 @@ export default function BasketVendor(props) {
         <h2>Actions</h2>
         <hr></hr>
         <div className="col-2 text-left">
+            <Link to="/addProduct" style={{color:'white'}}>
             <button onClick={() => console.log("Add Product")} className="add">
-            <Link to="/addProduct" style={{color:'white'}}>+ </Link>
-            </button> <strong>Add Product</strong>
+            +
+            </button> <strong>Add Product</strong></Link>
         </div>
 
         <div className="col-2 text-left">
+            <Link to="/updateProduct">
             <button onClick={() => console.log("Edit Product")} className="edit">
-            <Link to="/updateProduct">x</Link>
-            </button> <strong>Edit Product</strong>
+            x
+            </button> <strong>Edit Product</strong></Link>
         </div>
 
         <div className="col-2 text-left">
+            <Link to="/deleteProduct">
             <button onClick={() => console.log("Remove Product")} className="remove">
-            <Link to="/deleteProduct">-</Link>
-            </button> <strong>Remove Product</strong>
+            -
+            </button> <strong>Remove Product</strong></Link>
         </div>
 
         <hr></hr>
