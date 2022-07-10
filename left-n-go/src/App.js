@@ -25,9 +25,11 @@ function App() {
   const { user } = useAuth();
   // const [ products, setProducts ] = useState([])
 
+  //Obtained the items from useCollection() hook, 
+  //From useCollection() hook, exported { documents }, renamed it as "products"
   const { documents: products } = useCollection("products");
   
-  products.length === 0 ? console.log("products still fetching") : console.log(products)
+  // products.length === 0 ? console.log("products still fetching") : console.log(products)
   
   // useEffect(() => {
   //   const collectionRef = collection(firestore, "products");
@@ -47,7 +49,7 @@ function App() {
   // }, [])
   
 
-  console.log(products)
+  // console.log(products)
 
 
   return (
