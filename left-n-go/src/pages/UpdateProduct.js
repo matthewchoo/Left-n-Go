@@ -16,14 +16,14 @@ const UpdateProduct = (props) => {
     const [ name, setName ] = useState('');
     const [ description, setDescription ] = useState('');
     const [ price, setPrice ] = useState('');
-    const [ quantity, setQuantity ] = useState('');
+    const [ quantity, setQuantity ] = useState(1);
     const [foodID, setID] = useState('');
     
     const [ imageAsset, setImageAsset ] = useState(null);
     const [ imageName, setImageName ] = useState('');
 
     const [ fields, setFields ] = useState(false);
-    //const [ alertStatus, setAlertStatus ] = useState('danger');
+    const [ isLoading, setIsLoading ] = useState(false)
     const [ msg, setMsg ] = useState(null);
 
     // console.log(name + " " + description + 
@@ -50,24 +50,9 @@ const UpdateProduct = (props) => {
 
         
     };
-/*
-    const saveItem = async (data) => {
-        
 
-        firestore.collection("Products").doc(data.foodID).set({
-            description: data.description,
-            name: data.name,
-            imageURL : data.imageURL, 
-            quantity: data.quantity, 
-            price: data.price
-        }).then(() => {
-            console.log("Document updated succesfully");
-        }).catch((err) => {
-            console.log("Error : " + err.message);
-        });
-    }
-*/
     const uploadImage = (e) => { 
+        setIsLoading(true)
         const imageFile = e.target.files[0]; //Only single image
         const storageRef = ref(storage, `Images/${Date.now()}-${imageFile.name}`); //Image Name
         setImageName(imageFile.name);
@@ -79,7 +64,7 @@ const UpdateProduct = (props) => {
             console.log(error);
             setFields(true);
             setMsg('Error while uploading : Try Again');
-            //setAlertStatus('danger');
+            setIsLoading(false)
 
             setTimeout(() => {
                 setFields(false);
@@ -89,16 +74,17 @@ const UpdateProduct = (props) => {
                 setImageAsset(downloadURL);
                 setFields(true);
                 setMsg('Image uploaded successfully');
-                //setAlertStatus('success')
-
+                
+                setIsLoading(false)
                 setTimeout(() => {
                     setFields(false);
-                }, 0); //Originally 2000
+                }, 4000); //Originally 2000
             })
         });
      };
 
     const deleteImage = () => {
+        setIsLoading(true)
 
         const deleteRef = ref(storage, imageAsset);
         deleteObject(deleteRef).then(() => {
@@ -106,7 +92,8 @@ const UpdateProduct = (props) => {
             setImageName('');
             setFields(true);
             setMsg('Image deleted successfully');
-                //setAlertStatus('success');
+                setIsLoading(false)
+
 
                 setTimeout(() => {
                     setFields(false);
@@ -123,7 +110,7 @@ const UpdateProduct = (props) => {
 
                 setTimeout(() => {
                     setFields(false);
-                }, 0) //4000 originally
+                }, 4000) //4000 originally
             } else {
                 const data = {
                     id : foodID,
@@ -140,11 +127,11 @@ const UpdateProduct = (props) => {
                 setFields(true);
                 setMsg('Data uploaded successfully');
                 deleteDetails();
-                //setAlertStatus('success');
+                
 
                 setTimeout(() => {
                     setFields(false);
-                }, 1000); //4000 originally
+                }, 4000); //4000 originally
             }
 
 
@@ -152,7 +139,6 @@ const UpdateProduct = (props) => {
                 console.log(error);
                 setFields(true);
                 setMsg('Error while uploading : Try Again');
-                //setAlertStatus('danger');
 
                 setTimeout(() => {
                 setFields(false);
@@ -178,6 +164,10 @@ const UpdateProduct = (props) => {
 
         { fields && ( 
                 <h1 style={{color: "red"}} >{ msg }</h1>
+        )}
+
+        { isLoading && ( 
+                <h1 style={{color: "red"}} >Uploading image...</h1>
         )}
 
         <form>
@@ -335,47 +325,32 @@ const UpdateProduct = (props) => {
                 }</>
 
             </div>
-
-
-            {/* <Paper />
-            <Box /> */}
             
             {/* Button for Upload */}
-            <div><Button sx={{width:'29ch'}} 
-            style={
-                {
-                    // background: "#f1356d",
-                    background: "#5297FF",
-                    color: "#fff",
-                    border: "0",
-                    padding: "8px",
-                    borderRadius: "10px",
-                    cursor: "pointer",
-                    marginTop: "30px"
+            <div><Button sx={{
+                width:'29ch',
+                ':hover' : {
+                    bgcolor: "#555",
                 }
-            }
+            }} 
+            className={ isLoading ? "disabled-btn" : "submit-btn" }
             type="submit"
+            disabled={isLoading}
 
             onClick={ saveDetails }
             >Upload</Button>
-
+            
             <Link to="/homeVendor">
-            <Button sx={{width:'20ch'}} 
-            style={
-                {
-                    // background: "#f1356d",
-                    marginLeft: '0.8rem',
-                    background: "#5297FF",
-                    color: "#fff",
-                    border: "0",
-                    padding: "8px",
-                    borderRadius: "10px",
-                    cursor: "pointer",
-                    marginTop: "30px"
-                }
-            }
-            type="submit"
-            >Back</Button>
+                <Button sx={{
+                    width:'20ch',
+                    ':hover' : {
+                        bgcolor: "#555",
+                    }
+                }} 
+                
+                className='back-btn'
+                type="submit"
+                >Back</Button>
             </Link>
             </div>
             
