@@ -5,7 +5,7 @@ import { collection, onSnapshot } from "firebase/firestore"
 import { firestore } from "../config/firebaseConfig"
 
 export const useCollection = (collectionName) => {
-    const [ documents, setDocuments ] = useState(null)
+    const [ documents, setDocuments ] = useState([])
     
     useEffect(() => {
         let ref = collection(firestore, collectionName)

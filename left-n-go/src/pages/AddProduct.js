@@ -58,7 +58,7 @@ const AddProduct = () => {
 
                 setTimeout(() => {
                     setFields(false);
-                }, 0); //Originally 2000
+                }, 2000); //Originally 2000
             })
         });
      };
@@ -88,7 +88,7 @@ const AddProduct = () => {
 
                 setTimeout(() => {
                     setFields(false);
-                }, 0) //4000 originally
+                }, 4000) //4000 originally
             } else {
                 const data = {
                     id : `${Date.now()}`,
@@ -190,7 +190,7 @@ const AddProduct = () => {
                         Qty
                     </InputLabel>
                     <NativeSelect
-                        defaultValue={" "}
+                        // defaultValue={" "}
                         inputProps={{
                         name: 'age',
                         id: 'uncontrolled-native',

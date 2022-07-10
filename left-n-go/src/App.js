@@ -15,42 +15,48 @@ import DeleteProduct from './pages/DeleteProduct';
 //import VendorProfile from './pages/ProfileVendor';
 
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-import { firestore } from './config/firebaseConfig';
-import { collection, getDocs } from 'firebase/firestore';
+// import { firestore } from './config/firebaseConfig';
+// import { collection, getDocs } from 'firebase/firestore';
 
 // import { useEffect } from 'react';
 //import { Logout } from '@mui/icons-material';
 import { useAuth } from './hooks/useAuth';
-// import { useCollection } from './hooks/useCollection';
+// import { useState, useEffect } from 'react';
+import { useCollection } from './hooks/useCollection';
 
 function App() {
   const { user } = useAuth();
+
+  // const [ products, setProducts ] = useState([])
   
-const collectionRef = collection(firestore, "products");
 
-
-  let products = [];
-
-  // const { documents: products } = useCollection('products');
+  const { documents: products } = useCollection("products");
   
   // if (products.length === 0) {
   //   console.log("There are 0 items in the collection.")
   // }
   
-  // products.length === 0 ? console.log("products still fetching") : console.log(products)
+  products.length === 0 ? console.log("products still fetching") : console.log(products)
   
-  getDocs(collectionRef).then((snapshot) => {
-    snapshot.docs.forEach((doc) => {
-      products.push({ ...doc.data(), id: doc.id })
-    });
-    // products.forEach(product => {
-    //   console.log("IMAGE URL")
-    //   console.log(product.imageURL)
-    // })
-  }).catch(err => {
-    console.log(err.message);
-  });
+  // useEffect(() => {
+  //   const collectionRef = collection(firestore, "products");
+  //   getDocs(collectionRef).then((snapshot) => {
+  //     let products = [];
+  //     snapshot.docs.forEach((doc) => {
+  //       products.push({ ...doc.data(), id: doc.id })
+  //     });
+  //     // products.forEach(product => {
+  //     //   console.log("IMAGE URL")
+  //     //   console.log(product.imageURL)
+  //     // })
+  //     setProducts(products)
+  //   }).catch(err => {
+  //     console.log(err.message);
+  //   });
+  // }, [])
+  
 
+  console.log(products)
   // const fetchData = async () => {
   //   await getItems().then((data) => {
   //     data.forEach((doc) => {
