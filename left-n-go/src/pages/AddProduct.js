@@ -4,9 +4,9 @@ import { useState } from "react";
 
 import { Link } from 'react-router-dom';
 
-import { doc, setDoc } from "firebase/firestore";
+// import { doc, setDoc } from "firebase/firestore";
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable  } from "firebase/storage";
-import { storage, firestore } from "../config/firebaseConfig";
+import { storage, saveItem } from "../config/firebaseConfig";
 
 
 const AddProduct = () => {
@@ -14,25 +14,23 @@ const AddProduct = () => {
     const [ name, setName ] = useState('');
     const [ description, setDescription ] = useState('');
     const [ price, setPrice ] = useState('');
-    const [ quantity, setQuantity ] = useState('');
+    const [ quantity, setQuantity ] = useState(1);
     
+    //images
     const [ imageAsset, setImageAsset ] = useState(null);
     const [ imageName, setImageName ] = useState('');
 
+
+    //fields is for the error message
     const [ fields, setFields ] = useState(false);
-    //const [ alertStatus, setAlertStatus ] = useState('danger');
     const [ msg, setMsg ] = useState(null);
+    const [ isLoading, setIsLoading ] = useState(false)
 
     // console.log(name + " " + description + 
-    // " " + price + " " + quantity);
-
-    const saveItem = async (data) => {
-        await setDoc(doc(firestore, "products", `${Date.now()}`), data, { 
-          merge : true 
-        });
-    };
+    // " " + price + " " + quantity + " " + imageAsset);
 
     const uploadImage = (e) => { 
+        setIsLoading(true)
         const imageFile = e.target.files[0]; //Only single image
         const storageRef = ref(storage, `Images/${Date.now()}-${imageFile.name}`); //Image Name
         setImageName(imageFile.name);
@@ -44,7 +42,7 @@ const AddProduct = () => {
             console.log(error);
             setFields(true);
             setMsg('Error while uploading : Try Again');
-            //setAlertStatus('danger');
+            setIsLoading(false)
 
             setTimeout(() => {
                 setFields(false);
@@ -54,16 +52,17 @@ const AddProduct = () => {
                 setImageAsset(downloadURL);
                 setFields(true);
                 setMsg('Image uploaded successfully');
-                //setAlertStatus('success')
-
+                
+                setIsLoading(false)
                 setTimeout(() => {
                     setFields(false);
-                }, 2000); //Originally 2000
+                }, 4000); //Originally 2000
             })
         });
      };
 
     const deleteImage = () => {
+        setIsLoading(true)
 
         const deleteRef = ref(storage, imageAsset);
         deleteObject(deleteRef).then(() => {
@@ -71,7 +70,7 @@ const AddProduct = () => {
             setImageName('');
             setFields(true);
             setMsg('Image deleted successfully');
-                //setAlertStatus('success');
+            setIsLoading(false)
 
                 setTimeout(() => {
                     setFields(false);
@@ -84,7 +83,6 @@ const AddProduct = () => {
             if( (!name || !description || !quantity || !price || !imageAsset ) ) {
                 setFields(true);
                 setMsg("Required fields can't be empty");
-                //setAlertStatus('danger');
 
                 setTimeout(() => {
                     setFields(false);
@@ -105,11 +103,10 @@ const AddProduct = () => {
                 setFields(true);
                 setMsg('Data uploaded successfully');
                 deleteDetails();
-                //setAlertStatus('success');
 
                 setTimeout(() => {
                     setFields(false);
-                }, 1000); //4000 originally
+                }, 4000); //4000 originally
             }
 
 
@@ -117,7 +114,6 @@ const AddProduct = () => {
                 console.log(error);
                 setFields(true);
                 setMsg('Error while uploading : Try Again');
-                //setAlertStatus('danger');
 
                 setTimeout(() => {
                 setFields(false);
@@ -141,6 +137,10 @@ const AddProduct = () => {
 
         { fields && ( 
                 <h1 style={{color: "red"}} >{ msg }</h1>
+        )}
+
+        { isLoading && ( 
+                <h1 style={{color: "red"}} >Uploading image...</h1>
         )}
 
         <form>
@@ -190,7 +190,6 @@ const AddProduct = () => {
                         Qty
                     </InputLabel>
                     <NativeSelect
-                        // defaultValue={" "}
                         inputProps={{
                         name: 'age',
                         id: 'uncontrolled-native',
@@ -274,46 +273,32 @@ const AddProduct = () => {
 
             </div>
 
-
-            {/* <Paper />
-            <Box /> */}
             
             {/* Button for Upload */}
-            <div><Button sx={{width:'29ch'}} 
-            style={
-                {
-                    // background: "#f1356d",
-                    background: "#5297FF",
-                    color: "#fff",
-                    border: "0",
-                    padding: "8px",
-                    borderRadius: "10px",
-                    cursor: "pointer",
-                    marginTop: "30px"
+            <div><Button sx={{
+                width:'29ch',
+                ':hover' : {
+                    bgcolor: "#555",
                 }
-            }
+            }} 
+            className={ isLoading ? "disabled-btn" : "submit-btn" }
             type="submit"
+            disabled={isLoading}
 
             onClick={ saveDetails }
             >Upload</Button>
             
             <Link to="/homeVendor">
-            <Button sx={{width:'20ch'}} 
-            style={
-                {
-                    // background: "#f1356d",
-                    marginLeft: '0.8rem',
-                    background: "#5297FF",
-                    color: "#fff",
-                    border: "0",
-                    padding: "8px",
-                    borderRadius: "10px",
-                    cursor: "pointer",
-                    marginTop: "30px"
-                }
-            }
-            type="submit"
-            >Back</Button>
+                <Button sx={{
+                    width:'20ch',
+                    ':hover' : {
+                        bgcolor: "#555",
+                    }
+                }} 
+                
+                className='back-btn'
+                type="submit"
+                >Back</Button>
             </Link>
             
             </div>

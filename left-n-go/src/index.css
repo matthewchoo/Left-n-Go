@@ -265,6 +265,37 @@ text-align: right;
   margin-left: 13%;
 }
 
+.addProduct .submit-btn {
+  background-color: #5297FF;
+  color: #fff;
+  border: 0;
+  padding: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 30px;
+}
+
+.addProduct .disabled-btn {
+  background-color: #5297ff93;
+  color: #fff;
+  border: 0;
+  padding: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 30px;
+}
+
+.addProduct .back-btn {
+  background-color: #5297FF;
+  margin-left: 0.8rem;
+  color: #fff;
+  border: 0;
+  padding: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 30px;
+}
+
 /* .login input, .login textarea, .login select {
   width: 100%;
   padding: 6px 10px;
