@@ -12,13 +12,10 @@ import UpdateProduct from './pages/UpdateProduct';
 import DeleteProduct from './pages/DeleteProduct';
 // import data from './data';
 
-//import VendorProfile from './pages/ProfileVendor';
-
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 // import { firestore } from './config/firebaseConfig';
 // import { collection, getDocs } from 'firebase/firestore';
 
-// import { useEffect } from 'react';
 //import { Logout } from '@mui/icons-material';
 import { useAuth } from './hooks/useAuth';
 // import { useState, useEffect } from 'react';
@@ -26,15 +23,9 @@ import { useCollection } from './hooks/useCollection';
 
 function App() {
   const { user } = useAuth();
-
   // const [ products, setProducts ] = useState([])
-  
 
   const { documents: products } = useCollection("products");
-  
-  // if (products.length === 0) {
-  //   console.log("There are 0 items in the collection.")
-  // }
   
   products.length === 0 ? console.log("products still fetching") : console.log(products)
   
@@ -57,21 +48,7 @@ function App() {
   
 
   console.log(products)
-  // const fetchData = async () => {
-  //   await getItems().then((data) => {
-  //     data.forEach((doc) => {
-  //       products.push({ ...doc.data, id: doc.id })
-  //     });
-  //     console.log(data);
-  //     //setDbData(data);
-  //   });
-  // };
 
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
-
-  // console.log("DBData:" + dbData);
 
   return (
     <Router>
