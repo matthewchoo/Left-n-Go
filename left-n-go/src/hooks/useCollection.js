@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react"
-import { db } from "../firebase/config"
 
 //firebase imports
 import { collection, onSnapshot } from "firebase/firestore"
-
+import { firestore } from "../config/firebaseConfig"
 
 export const useCollection = (collectionName) => {
     const [ documents, setDocuments ] = useState(null)
     
     useEffect(() => {
-        let ref = collection(db, collectionName)
+        let ref = collection(firestore, collectionName)
 
         const unsub = onSnapshot(ref, (snapshot) => {
             let results = []

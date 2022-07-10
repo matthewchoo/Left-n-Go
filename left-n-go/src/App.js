@@ -21,18 +21,23 @@ import { collection, getDocs } from 'firebase/firestore';
 // import { useEffect } from 'react';
 //import { Logout } from '@mui/icons-material';
 import { useAuth } from './hooks/useAuth';
+// import { useCollection } from './hooks/useCollection';
 
 function App() {
   const { user } = useAuth();
-
-  // const { products } = data;
-
-  //To set Initial state
-  
   
 const collectionRef = collection(firestore, "products");
 
+
   let products = [];
+
+  // const { documents: products } = useCollection('products');
+  
+  // if (products.length === 0) {
+  //   console.log("There are 0 items in the collection.")
+  // }
+  
+  // products.length === 0 ? console.log("products still fetching") : console.log(products)
   
   getDocs(collectionRef).then((snapshot) => {
     snapshot.docs.forEach((doc) => {
