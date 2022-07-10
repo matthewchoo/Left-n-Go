@@ -237,7 +237,6 @@ const UpdateProduct = (props) => {
                         New Qty
                     </InputLabel>
                     <NativeSelect
-                        defaultValue={" "}
                         inputProps={{
                         name: 'age',
                         id: 'uncontrolled-native',

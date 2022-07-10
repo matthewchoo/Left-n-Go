@@ -5,7 +5,7 @@ export default function Product(props) {
     // const {products} = data;
     const { product } = props;
     // console.log(props)
-
+    
     return (
         <div>
             <img className="small" src={ product.imageURL } alt={product.name}></img>
