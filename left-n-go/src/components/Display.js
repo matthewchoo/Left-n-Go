@@ -6,7 +6,7 @@ export default function Main(props) {
    
     // console.log({products});
 
-    console.log(props);
+    // console.log(props);
     const rows = [...Array(Math.ceil(props.products.length/3))]
 
     const productRows = rows.map ((row,idx) => props.products.slice(idx * 3, idx * 3 + 3));
