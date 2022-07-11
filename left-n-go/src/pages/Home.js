@@ -25,11 +25,13 @@ const Home = (props) => {
 
     const [cartItems, setCartItems] = useState([]);
     const onAdd = (product) => {
+        
         const exist = cartItems.find(x => x.id === product.id);
+        //console.log(exist.qty);
         if (exist) {
             setCartItems(
                 cartItems.map( (x) => 
-                    x.id === product.id ? {...exist, qty: exist.qty + 1} : x
+                    x.id === product.id ? exist.qty < x.quantity ? {...exist, qty: exist.qty + 1} : x : x
                 )
             );
         } else {
