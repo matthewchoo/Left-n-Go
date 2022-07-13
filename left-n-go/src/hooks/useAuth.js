@@ -1,19 +1,3 @@
-// Comments
-// import * as firebase from "firebase/app"; for firebase 8
-// import "firebase/auth"; for firebase 8
-
-// TODO: Replace the following with your app's Firebase project configuration
-// const firebaseConfig = {
-//   //...
-// };
-// Add your Firebase credentials
-// firebase.initializeApp({
-//   apiKey: "",
-//   authDomain: "",
-//   projectId: "",
-//   appID: "",
-// });
-//the above part is already in firebaseConfig in ../config/firebaseConfig
 import React, { useState, useEffect, useContext, createContext } from "react";
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from "../config/firebaseConfig";
@@ -21,17 +5,12 @@ import { firebaseConfig } from "../config/firebaseConfig";
 import { getAuth, GoogleAuthProvider, signInWithPopup, GithubAuthProvider, 
     signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword  } from "firebase/auth";
 
-    // signInWithEmailAndPassword, createUserWithEmailAndPassword, 
-    // sendPasswordResetEmail, confirmPasswordReset
-
 const app = initializeApp(firebaseConfig);
 
 // Initialize Firebase Authentication and get a reference to the service
 const auth = getAuth(app);
 
 //Initialize Firebase Auth for google auth
-//const firebaseAuth = getAuth(app);
-
 const googleAuthProvider = new GoogleAuthProvider();
 const gitHubAuthProvider = new GithubAuthProvider();
 
@@ -50,6 +29,7 @@ export const useAuth = () => {
 // Provider hook that creates auth object and handles state
 function useProvideAuth() {
   const [user, setUser] = useState(null);
+
   // Wrap any Firebase methods we want to use making sure ...
   // ... to save the user to state.
   const signin = (email, password) => {
@@ -63,16 +43,6 @@ function useProvideAuth() {
       // Firebase9 code
     return signInWithEmailAndPassword(auth, email, password)
     
-    // .then((response) => {
-    //   setUser(response.user);
-    //   return response.user;
-    // })
-    // .catch((error) => {
-    //   const errorCode = error.code;
-    //   const errorMessage = error.message;
-    //   console.log(errorCode)
-    //   console.log(errorMessage)
-    // });
   };
   const signup = (email, password) => {
     // return auth
@@ -83,13 +53,7 @@ function useProvideAuth() {
     //   });
     return createUserWithEmailAndPassword(auth, email, password)
   };
-//   const signout = () => {
-//     return auth
-//       .signOut()
-//       .then(() => {
-//         setUser(false);
-//       });
-//   };
+
   const signout = () => {
     return signOut(auth);
   };
@@ -117,10 +81,7 @@ function useProvideAuth() {
     return signInWithPopup(auth, gitHubAuthProvider);
   }
 
-//   const signOut = () => {
-//     return signOut(auth);
-//   }
-
+  
   // Subscribe to user on mount
   // Because this sets state in the callback it will cause any ...
   // ... component that utilizes this hook to re-render with the ...

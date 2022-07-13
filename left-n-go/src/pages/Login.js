@@ -44,20 +44,7 @@ const Login = () => {
     function handleSubmit(event) {
         event.preventDefault();
 
-        // const loginData = {
-        //     email: emailValues,
-        //     password: passValues
-        // }
-        // setLoginDetails(loginData);
-
-        // signin(emailValues.email, passValues.password);
-
         signin(emailValues.email, passValues.password);
-        // console.log(emailValues.email);
-        // console.log(passValues.password);
-        // console.log(loginData);
-        // console.log(loginDetails);
-        // signin(loginData.email, loginData.password);
     };
 
     // function handleRegister(event) {
@@ -180,31 +167,3 @@ return (
 };
 
 export default Login;
-
-// const Login = () => {
-//     const [email, setEmail] = useState('');
-//     const [password, setPassword] = useState('');
-
-//     return ( 
-//         <div className="login" align="center">
-
-//             <h2>Login</h2>
-            
-//             <p>To continue with firebase auth, coupled with registration</p>
-//         </div>
-//      );
-// }
- 
-// export default Login;
-
-// <div
-// 	style={{
-// 		marginLeft: "30%",
-//         align: "center",
-// 	}}
-// 	></div>
-
-    // const [name, setName] = useState("");
-    // onClick = (() => {
-    //     const newEmail = prompt("Enter your email");
-    // });
