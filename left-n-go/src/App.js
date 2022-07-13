@@ -22,7 +22,8 @@ import { useAuth } from './hooks/useAuth';
 import { useCollection } from './hooks/useCollection';
 
 function App() {
-  const { user } = useAuth();
+  const { user, userType } = useAuth();
+  // console.log(userType)
   // const [ products, setProducts ] = useState([])
 
   //Obtained the items from useCollection() hook, 
@@ -77,7 +78,8 @@ function App() {
               <Logout />
             </Route>
             <Route path="/vendorProfile">
-              <ProfileVendor />
+              { user && userType === "Vendor" && <ProfileVendor /> }
+              { (!user || !userType === "Vendor") && <Redirect to="/home"/> }
             </Route>
             <Route path="/addProduct">
               <AddProduct />

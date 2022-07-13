@@ -1,13 +1,16 @@
 import { IconButton, InputLabel, Input, InputAdornment, Button } from '@mui/material';
 import { Visibility, VisibilityOff, Google, GitHub } from "@mui/icons-material";
 import { useState } from 'react';
-import { useAuth } from '../hooks/useAuth';
-
+// import { useAuth } from '../hooks/useAuth';
+import { useProvideAuth } from '../hooks/useProvideAuth';
 
 // import { useHistory } from "react-router-dom";
 // import { useEffect } from 'react';
 
 const Login = () => {
+
+    const { signin, signInWithGoogle, signInWithGitHub, error } = useProvideAuth();
+
     const [passValues, setPassValues] = useState({
         password: "",
         showPassword: false,
@@ -16,6 +19,9 @@ const Login = () => {
     const [emailValues, setEmailValues] = useState({
         email: "",
     });
+
+    //user type default = User
+    // const [ userType, setUserType ] = useState("User")
 
     // const [loginDetails, setLoginDetails] = useState(
     //     []
@@ -44,7 +50,7 @@ const Login = () => {
     function handleSubmit(event) {
         event.preventDefault();
 
-        signin(emailValues.email, passValues.password);
+        signin(emailValues.email, passValues.password, "Admin");
     };
 
     // function handleRegister(event) {
@@ -53,7 +59,6 @@ const Login = () => {
     //     signup(emailValues.email, passValues.password);
     // };
 
-    const { signin, signInWithGoogle, signInWithGitHub } = useAuth();
     // signup, 
 
 return (
@@ -62,6 +67,8 @@ return (
     
         <h2>Welcome Back</h2>
         <p>Login with your email & password</p>
+
+        { error && <p>{ error }</p>}
 
         <form onSubmit={handleSubmit}>
             {/* For Email */}

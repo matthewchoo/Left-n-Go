@@ -1,114 +1,150 @@
-import React, { useState, useEffect, useContext, createContext } from "react";
+import React, { useEffect, useContext, createContext, useReducer } from "react";
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from "../config/firebaseConfig";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 // import ( firebaseConfig ) from "../config/firebaseConfig";
-import { getAuth, GoogleAuthProvider, signInWithPopup, GithubAuthProvider, 
-    signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword  } from "firebase/auth";
+// import { getAuth, GoogleAuthProvider, signInWithPopup, GithubAuthProvider, 
+//     signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged  } from "firebase/auth";
 
 const app = initializeApp(firebaseConfig);
 
 // Initialize Firebase Authentication and get a reference to the service
-const auth = getAuth(app);
+export const auth = getAuth(app);
 
 //Initialize Firebase Auth for google auth
-const googleAuthProvider = new GoogleAuthProvider();
-const gitHubAuthProvider = new GithubAuthProvider();
+// const googleAuthProvider = new GoogleAuthProvider();
+// const gitHubAuthProvider = new GithubAuthProvider();
 
 const authContext = createContext();
+
+export const authReducer = (state, action) => {
+  switch(action.type) {
+      case 'LOGIN':
+          return { ...state, user: action.payload, userType: action.userType }
+      
+      case 'LOGOUT': 
+          return { ...state, user: null, userType: null }
+      
+      case 'AUTH_IS_READY':
+          return { ...state, user: action.payload, authIsReady: true}
+      
+      default:
+          return state
+  }
+}
+
 // Provider component that wraps your app and makes auth object ...
 // ... available to any child component that calls useAuth().
 export function ProvideAuth({ children }) {
-  const auth = useProvideAuth();
-  return <authContext.Provider value={auth}>{children}</authContext.Provider>;
+  // const _auth = useProvideAuth();
+
+  const [ state, dispatch ] = useReducer(authReducer, {
+    user: null, 
+    authIsReady: false,
+    userType: null,
+  })
+
+
+  useEffect(() => {
+      const unsub = onAuthStateChanged(auth, user => {
+          dispatch({ type: 'AUTH_IS_READY', payload: user })
+          unsub()
+      })
+  }, [])
+
+// console.log('AuthContext state: ', _auth )
+console.log('AuthContext state: ', state )
+
+  return <authContext.Provider value={{ ...state, dispatch }}>{children}</authContext.Provider>;
 }
 // Hook for child components to get the auth object ...
 // ... and re-render when it changes.
 export const useAuth = () => {
   return useContext(authContext);
 };
-// Provider hook that creates auth object and handles state
-function useProvideAuth() {
-  const [user, setUser] = useState(null);
 
-  // Wrap any Firebase methods we want to use making sure ...
-  // ... to save the user to state.
-  const signin = (email, password) => {
-    // return auth
-    //   .signInWithEmailAndPassword(email, password)
-    //   .then((response) => {
-    //     setUser(response.user);
-    //     return response.user;
-    //   });
+// // Provider hook that creates auth object and handles state
+// function useProvideAuth() {
+//   const [user, setUser] = useState(null);
 
-      // Firebase9 code
-    return signInWithEmailAndPassword(auth, email, password)
+//   // Wrap any Firebase methods we want to use making sure ...
+//   // ... to save the user to state.
+//   const signin = (email, password) => {
+//     // return auth
+//     //   .signInWithEmailAndPassword(email, password)
+//     //   .then((response) => {
+//     //     setUser(response.user);
+//     //     return response.user;
+//     //   });
+
+//       // Firebase9 code
+//     return signInWithEmailAndPassword(auth, email, password)
     
-  };
-  const signup = (email, password) => {
-    // return auth
-    //   .createUserWithEmailAndPassword(email, password)
-    //   .then((response) => {
-    //     setUser(response.user);
-    //     return response.user;
-    //   });
-    return createUserWithEmailAndPassword(auth, email, password)
-  };
+//   };
+//   const signup = (email, password) => {
+//     // return auth
+//     //   .createUserWithEmailAndPassword(email, password)
+//     //   .then((response) => {
+//     //     setUser(response.user);
+//     //     return response.user;
+//     //   });
+//     return createUserWithEmailAndPassword(auth, email, password)
+//   };
 
-  const signout = () => {
-    return signOut(auth);
-  };
-  const sendPasswordResetEmail = (email) => {
-    return auth
-      .sendPasswordResetEmail(email)
-      .then(() => {
-        return true;
-      });
-  };
-  const confirmPasswordReset = (code, password) => {
-    return auth
-      .confirmPasswordReset(code, password)
-      .then(() => {
-        return true;
-      });
-  };
+//   const signout = () => {
+//     return signOut(auth);
+//   };
+//   const sendPasswordResetEmail = (email) => {
+//     return auth
+//       .sendPasswordResetEmail(email)
+//       .then(() => {
+//         return true;
+//       });
+//   };
+//   const confirmPasswordReset = (code, password) => {
+//     return auth
+//       .confirmPasswordReset(code, password)
+//       .then(() => {
+//         return true;
+//       });
+//   };
 
-  //created a const for signInWithGoogle
-  const signInWithGoogle = () => {
-      return signInWithPopup(auth, googleAuthProvider);
-  }
+//   //created a const for signInWithGoogle
+//   const signInWithGoogle = () => {
+//       return signInWithPopup(auth, googleAuthProvider);
+//   }
 
-  const signInWithGitHub = () => {
-    return signInWithPopup(auth, gitHubAuthProvider);
-  }
+//   const signInWithGitHub = () => {
+//     return signInWithPopup(auth, gitHubAuthProvider);
+//   }
 
-  
-  // Subscribe to user on mount
-  // Because this sets state in the callback it will cause any ...
-  // ... component that utilizes this hook to re-render with the ...
-  // ... latest auth object.
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        setUser(user);
-      } else {
-        setUser(false);
-      }
-    });
-    // Cleanup subscription on unmount
-    return () => unsubscribe();
-  }, []);
-  // Return the user object and auth methods
-  return {
-    user,
-    signin,
-    signup,
-    signout,
-    sendPasswordResetEmail,
-    confirmPasswordReset,
-    signInWithGoogle,
-    signInWithGitHub,
-  };
-}
+//   // Subscribe to user on mount
+//   // Because this sets state in the callback it will cause any ...
+//   // ... component that utilizes this hook to re-render with the ...
+//   // ... latest auth object.
+//   useEffect(() => {
+//     const unsubscribe = onAuthStateChanged(auth, (user) => {
+//       if (user) {
+//         setUser(user);
+//       } else {
+//         setUser(false);
+//       }
+//     });
+//     // Cleanup subscription on unmount
+//     return () => unsubscribe();
+//   }, []);
+//   // Return the user object and auth methods
+//   return {
+//     user,
+//     signin,
+//     signup,
+//     signout,
+//     sendPasswordResetEmail,
+//     confirmPasswordReset,
+//     signInWithGoogle,
+//     signInWithGitHub,
+//   };
+// }
 
 //Steps to doing auth 
 //1. Instantiate, import the required objects (follow firebase docs)
