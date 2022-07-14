@@ -20,6 +20,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import { useAuth } from './hooks/useAuth';
 // import { useState, useEffect } from 'react';
 import { useCollection } from './hooks/useCollection';
+import Register from './pages/Register';
 
 function App() {
   const { user, userType } = useAuth();
@@ -93,6 +94,9 @@ function App() {
             <Route path="/HomeVendor">
               <HomeVendor products={ products }/>
               {/* <Home /> */}
+            </Route>
+            <Route path="/register">
+              <Register />
             </Route>
             
             <Route path="*"> {/* Catchall Route for route that doesn't exist on top. */}

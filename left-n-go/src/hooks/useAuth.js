@@ -1,7 +1,8 @@
 import React, { useEffect, useContext, createContext, useReducer } from "react";
 import { initializeApp } from 'firebase/app';
-import { firebaseConfig } from "../config/firebaseConfig";
+import { firebaseConfig, firestore } from "../config/firebaseConfig";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
 // import ( firebaseConfig ) from "../config/firebaseConfig";
 // import { getAuth, GoogleAuthProvider, signInWithPopup, GithubAuthProvider, 
 //     signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged  } from "firebase/auth";
@@ -26,7 +27,7 @@ export const authReducer = (state, action) => {
           return { ...state, user: null, userType: null }
       
       case 'AUTH_IS_READY':
-          return { ...state, user: action.payload, authIsReady: true}
+          return { ...state, user: action.payload, authIsReady: true, userType: action.userType }
       
       default:
           return state
@@ -47,13 +48,26 @@ export function ProvideAuth({ children }) {
 
   useEffect(() => {
       const unsub = onAuthStateChanged(auth, user => {
+
+        //if there is a user, fetch the userType
+        if (user) {
+          const docRef = doc(firestore, 'users', user.uid)
+
+            getDoc(docRef).then((snapshot) => {
+                dispatch({ type: 'AUTH_IS_READY', payload: user, userType: snapshot.data().userType })
+                console.log("userType: ", snapshot.data().userType)
+            })
+        } else {
+          //else, dispatch as normal
           dispatch({ type: 'AUTH_IS_READY', payload: user })
+        }
           unsub()
       })
   }, [])
 
 // console.log('AuthContext state: ', _auth )
-console.log('AuthContext state: ', state )
+console.log('AuthContext state: ', state)
+// console.log('AuthContext userType: ', state.userType)
 
   return <authContext.Provider value={{ ...state, dispatch }}>{children}</authContext.Provider>;
 }

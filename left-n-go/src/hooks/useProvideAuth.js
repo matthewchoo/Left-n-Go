@@ -3,29 +3,53 @@ import { GoogleAuthProvider, signInWithPopup, GithubAuthProvider,
 import { auth, useAuth } from "./useAuth";
 import { useEffect, useState } from "react";
 
+import { doc, getDoc, setDoc } from "firebase/firestore";
+import { firestore } from "../config/firebaseConfig";
+
 const googleAuthProvider = new GoogleAuthProvider();
 const gitHubAuthProvider = new GithubAuthProvider();
+
+const saveItem = async (id, data) => {
+    await setDoc(doc(firestore, "users", id), data, { 
+      merge : true 
+    });
+};
 
 // Provider hook that creates auth object and handles state
 export function useProvideAuth() {
     const [ user, setUser ] = useState(null);
     const { dispatch } = useAuth()
     const [ error, setError ] = useState(null)
+
+    //const { documents: users } = useCollection('users', ['uid', '==', user.id])
+    //const docRef = doc(firestore, 'users', user.uid)
   
     // Wrap any Firebase methods we want to use making sure ...
     // ... to save the user to state.
-    const signin = (email, password, userType) => {
+    const signin = (email, password) => {
         setError(null)
+        // let uType = ''
+        
         signInWithEmailAndPassword(auth, email, password)
         .then((response) => {
-            dispatch({ type: 'LOGIN', payload: response.user, userType })
+            //to fetch uid here. If userType == null, set userType here
             setUser(response.user)
+            const docRef = doc(firestore, 'users', response.user.uid)
+            console.log(response.user.uid)
+
+            getDoc(docRef).then((snapshot) => {
+                // uType = snapshot.data().userType
+                // console.log("uType 1: ", uType)
+                dispatch({ type: 'LOGIN', payload: response.user, userType: snapshot.data().userType })
+                // console.log(result.userType)
+            })   
         })
         .catch((err) => {
             // setError(err.code)
             setError(err.message)
         })
 
+        
         return { error, signin }
 
         // Firebase9 code
@@ -39,6 +63,12 @@ export function useProvideAuth() {
             // dispatch({ type: 'LOGIN', payload: response.user, userType: "User" })
             dispatch({ type: 'LOGIN', payload: response.user, userType: userType })
             setUser(response.user)
+            const data = {
+                uid : response.user.uid,
+                email : response.user.email,
+                userType : userType,
+            }
+            saveItem(response.user.uid, data)
           })
           .catch((err) => {
             setError(err.message)
@@ -82,8 +112,14 @@ export function useProvideAuth() {
 
         signInWithPopup(auth, googleAuthProvider)
         .then((response) => {
-            dispatch({ type: 'LOGIN', payload: response.user, userType: "User" })
+            dispatch({ type: 'LOGIN', payload: response.user, userType: "Cust" })
             setUser(response.user)
+            const data = {
+                uid : response.user.uid,
+                email : response.user.email,
+                userType : "Cust",
+            }
+            saveItem(response.user.uid, data)
         })
         .catch((err) => {
             setError(err.message)
@@ -99,7 +135,7 @@ export function useProvideAuth() {
 
         signInWithPopup(auth, gitHubAuthProvider)
         .then((response) => {
-            dispatch({ type: 'LOGIN', payload: response.user, userType: "User" })
+            dispatch({ type: 'LOGIN', payload: response.user, userType: "Cust" })
             setUser(response.user)
         })
         .catch((err) => {

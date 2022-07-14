@@ -50,7 +50,7 @@ const Login = () => {
     function handleSubmit(event) {
         event.preventDefault();
 
-        signin(emailValues.email, passValues.password, "Admin");
+        signin(emailValues.email, passValues.password);
     };
 
     // function handleRegister(event) {
@@ -63,7 +63,7 @@ const Login = () => {
 
 return (
 	<div
-	className="login">
+	    className="login">
     
         <h2>Welcome Back</h2>
         <p>Login with your email & password</p>
