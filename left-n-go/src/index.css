@@ -159,6 +159,11 @@ img.small {
   max-height: 8rem;
 }
 
+img.wrap { 
+  height: 50px;
+  width: 50px;
+}
+
 img.icon {
   max-height: 8rem;
 }
@@ -295,6 +300,97 @@ text-align: right;
   cursor: pointer;
   margin-top: 30px;
 }
+
+.mbutton {
+  border: 0;
+  outline: 0;
+  padding: 0.5rem 1.5rem;
+  font-weight: 600;
+  color: #fff;
+  background-color: #4267b2;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal {
+  opacity: 0;
+  visibility: hidden;
+  position: fixed;
+  z-index:1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: #000000;
+  
+  transition: 0.3s ease-in-out;
+
+  
+}
+
+.active {
+  opacity:1;
+  visibility: visible;
+  position: fixed;
+  z-index:1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.7);
+  
+  transition: 0.3s ease-in-out;
+}
+
+.modal-content {
+  width: 500px;
+  margin: 15% auto;
+  background-color: #fff;
+  border-radius:5px;
+  position: relative;
+  transition: inherit;
+  opacity:0;
+  visibility:hidden;
+  transform:translateY(-100px);
+}
+
+.active-content {
+  opacity:1;
+  visibility: visible;
+  width: 500px;
+  margin: 15% auto;
+  background-color: #fff;
+  border-radius:5px;
+  position: relative;
+  transition: inherit;
+  transform:translateY(0);
+}
+
+.modal-header {
+  padding: 20px 20px;
+}
+
+.modal-body {
+  padding: 16px 20px;
+}
+
+.modal-footer {
+  padding: 16px 20px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #7f7f7f;
+}
+
+
+
 
 /* .login input, .login textarea, .login select {
   width: 100%;

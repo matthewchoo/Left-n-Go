@@ -1,16 +1,34 @@
-import React from 'react';
+//import { Button } from 'bootstrap';
+import MButton from './MButton';
+import React, {useState} from 'react';
+import Modal from './Modal';
+
+import { ModalBody, ModalFooter, ModalHeader } from './Modal';
+
+
+
 
 export default function Basket(props) {
     const {cartItems, onAdd, onRemove} = props;
     const itemsPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
     const taxPrice = itemsPrice * 0.17;
     const totalPrice = itemsPrice + taxPrice;
+    const [showModal, setShowModal] = useState(false);
 
-    return <aside className="block col-1">
+
+
+    
+
+
+    return <aside  className= "block col-1" >
         <h2>Cart Items</h2>
         <div>
             {cartItems.length === 0 && <div>Cart is Empty. Please add something!</div>}
+            
         </div>
+        
+        
+
 
         {cartItems.map((item) => (
             <div key={item.id} className = "rowBasket">
@@ -54,10 +72,50 @@ export default function Basket(props) {
                 </div>
 
                 <div>
-                    <button className="block" onClick={() => alert('Implement Checkout')}>
+                    <button className="block" onClick={() => setShowModal(true)}>
                         Checkout
                     </button>
+
+                    <Modal show ={showModal} setShow={setShowModal}>
+                        <ModalHeader>
+                            <h2>Confirmation</h2>
+                            <hr></hr>
+                        </ModalHeader>
+                        <ModalBody>
+                            
+
+                            {cartItems.map((item) => (
+                            <div key={item.id} className = "rowBasket">
+                            <div className="col-2 text-left"><img className="wrap" src={ item.imageURL } alt={item.name}></img> {item.name} : {item.qty} x ${item.price}</div>
+                            </div>
+                            ))}
+                            
+                            
+                            <hr></hr>
+                            <div>Total: <strong>${totalPrice.toFixed(2)}</strong></div>
+                            
+                        </ModalBody>
+
+                        <ModalFooter>
+
+                        
+                            
+                            <MButton onClick={() => setShowModal(false)} >
+                                Confirm
+                            </MButton>
+
+                            <MButton onClick={() => setShowModal(false)}>
+                                Close
+                            </MButton>
+                        
+                        </ModalFooter>
+                    </Modal>
+
+                    
+
                 </div>
+
+                
             </>
 
         )}

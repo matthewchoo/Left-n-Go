@@ -1,6 +1,6 @@
 import Main from "../components/Main";
 import Basket from "../components/Basket"
-import { useState } from "react";
+import React, { useState } from "react";
 // import { getItems } from "../config/firebaseConfig";
 
 // import data from '../data';
