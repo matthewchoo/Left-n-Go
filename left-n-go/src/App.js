@@ -5,7 +5,7 @@ import NotFound from './pages/NotFound';
 import Cart from './pages/Cart';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
-import ProfileVendor from './pages/ProfileVendor';
+import Profile from './pages/Profile';
 import HomeVendor from './pages/HomeVendor'
 import AddProduct from './pages/AddProduct';
 import UpdateProduct from './pages/UpdateProduct';
@@ -78,9 +78,16 @@ function App() {
             <Route path="/logout">
               <Logout />
             </Route>
-            <Route path="/vendorProfile">
+            {/* <Route path="/vendorProfile">
               { user && userType === "Vendor" && <ProfileVendor /> }
-              { (!user || !userType === "Vendor") && <Redirect to="/home"/> }
+              { user && userType === "Admin" && <ProfileVendor /> }
+              { (!user || userType !== "Vendor" || userType !== 'Admin') && <Redirect to="/home"/> }
+            </Route> */}
+            <Route path="/profile">
+              { user && userType === "Vendor" && <Profile /> }
+              { user && userType === "Cust" && <Profile /> }
+              { user && userType === "Admin" && <Profile /> }
+              { !user && <Redirect to="/home"/> }
             </Route>
             <Route path="/addProduct">
               <AddProduct />
@@ -95,6 +102,7 @@ function App() {
               <HomeVendor products={ products }/>
               {/* <Home /> */}
             </Route>
+
             <Route path="/register">
               <Register />
             </Route>

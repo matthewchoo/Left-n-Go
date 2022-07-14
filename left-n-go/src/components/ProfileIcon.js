@@ -51,7 +51,7 @@ function ProfileIcon() {
                 onClose={handleClose}
               >
                 {/* <Link to="/" style={{textDecoration:"none"}}><MenuItem onClick={handleClose}>Profile</MenuItem></Link> */}
-                <Link to="/vendorProfile" style={{textDecoration:"none"}}><MenuItem>Profile</MenuItem></Link>
+                <Link to="/profile" style={{textDecoration:"none"}}><MenuItem>Profile</MenuItem></Link>
                 <Link to="/logout" style={{textDecoration:"none"}}><MenuItem onClick={signout}>Sign Out</MenuItem></Link>
               </Menu>
               </>
