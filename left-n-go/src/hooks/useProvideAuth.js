@@ -1,5 +1,6 @@
 import { GoogleAuthProvider, signInWithPopup, GithubAuthProvider, 
-    signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged  } from "firebase/auth";
+    signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged
+    , updateEmail  } from "firebase/auth";
 import { auth, useAuth } from "./useAuth";
 import { useEffect, useState } from "react";
 
@@ -146,6 +147,24 @@ export function useProvideAuth() {
 
     //   return signInWithPopup(auth, gitHubAuthProvider);
     }
+
+    const changeEmail = (newEmail) => {
+        setError(null)
+        updateEmail(auth.currentUser, newEmail)
+            .then((response) => {
+                setUser(response.user)
+                const data = {
+                    uid : response.user.uid,
+                    email : response.user.email,
+                }
+                saveItem(response.user.uid, data)
+            })
+            .catch((err) => {
+                setError(err.message)
+            })
+        
+            return { error, changeEmail }
+    }
   
     // Subscribe to user on mount
     // Because this sets state in the callback it will cause any ...
@@ -173,5 +192,6 @@ export function useProvideAuth() {
       confirmPasswordReset,
       signInWithGoogle,
       signInWithGitHub,
+      changeEmail
     };
   }

@@ -1,11 +1,17 @@
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
+// import { useProvideAuth } from "../hooks/useProvideAuth";
 //import { useState } from "react";
 //import { IconButton, InputLabel, Input, InputAdornment, Button } from '@mui/material';
 
 const Profile = () => {
     const { user, userType } = useAuth();
+    // const { error, updateEmail } = useProvideAuth()
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+    }
 
     return ( 
         <div className="home">
@@ -20,6 +26,18 @@ const Profile = () => {
              
             <div className="image-container">
                 <h1>Email: { user.email }</h1>
+            </div>
+            <div className="image-container">
+                {/* <h1>Password:  </h1> */}
+                <Button 
+                    size="large" 
+                    variant="outlined"
+                    style={{marginBottom: '20px', marginTop:'20px'}}
+                    sx={{
+                        width:'25ch',
+                    }}
+                    onClick={handleSubmit}
+                    >Change Email</Button>
             </div>
             <div className="image-container">
                 <h1>Account Type: { userType === "Cust" ? "Customer" : userType }</h1>
