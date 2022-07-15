@@ -30,6 +30,7 @@ function App() {
   //Obtained the items from useCollection() hook, 
   //From useCollection() hook, exported { documents }, renamed it as "products"
   const { documents: products } = useCollection("products");
+  const { documents: orders } = useCollection("orders");
   
   // products.length === 0 ? console.log("products still fetching") : console.log(products)
   
@@ -70,7 +71,7 @@ function App() {
               {/* <Home /> */}
             </Route>
             <Route path="/cart">
-              <Cart />
+              <Cart orders = {orders}/>
             </Route>
             <Route path="/login">
               { user ? <Redirect to="/home"/> : <Login /> }

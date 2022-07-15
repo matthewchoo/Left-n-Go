@@ -1,13 +1,40 @@
-const Cart = () => {
+
+
+
+const Cart = (props) => {
+
+    const orders = props.orders;
+
     return ( 
-        <div className="cart">
-            <h2>Cart</h2>
-            <div style = {{display: "flex",flexFlow: "row nowrap"}}>
-                <div className="HeaderBox" style={{flex: 1}}><h2>Placeholder 1 (For Products)</h2></div>
-                <div className="HeaderBox" style={{flex: 1, textAlign: "right"}}><h2>Placeholder 2 (For Cart/Checkout)</h2></div>
-            </div>
-            {/* <p>To be Continued.</p> */}
+        <div className ="container-app">
+            <h1 className="ordersHeader">ORDERS</h1>
+            {orders.map( (x) => {
+                const a = x.name
+                const boxColour = x.completed ? 'green' : 'blue'
+                const checker = x.completed ? 'Collected:' : '[Paid] To Collect:'
+                return(
+                    <div className={"ordersBox" + boxColour} key={x.id}>
+                    <strong>{checker} from {x.vendorMail}</strong> 
+                    
+                    <h2 ><img className="wrap" src={ x.imageURL } alt={x.name}></img>
+                    <h3 style={{display:"inline"}} className="cartText">{a}
+                        <h4>
+                        
+                            Qty: {x.quantity}
+                        </h4>
+                            
+                        
+                    </h3> 
+                    
+                    </h2>
+                    </div>
+                )
+
+            })}
+
+
         </div>
+        
      );
 }
  
