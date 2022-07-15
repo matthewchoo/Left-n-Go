@@ -2,9 +2,11 @@
 import MButton from './MButton';
 import React, {useState} from 'react';
 import Modal from './Modal';
-import { firestore } from "../config/firebaseConfig";
+import { firestore, saveOrder } from "../config/firebaseConfig";
 import { deleteDoc, doc, runTransaction } from "firebase/firestore";
 import { ModalBody, ModalFooter, ModalHeader } from './Modal';
+import { useAuth } from "../hooks/useAuth";
+
 
 
 
@@ -16,6 +18,7 @@ export default function Basket(props) {
     const taxPrice = itemsPrice * 0.17;
     const totalPrice = itemsPrice + taxPrice;
     const [showModal, setShowModal] = useState(false);
+    const { user } = useAuth();
 
     const deleteItem = async (data) => {
         await deleteDoc(doc(firestore, "products", data.id));
@@ -23,7 +26,10 @@ export default function Basket(props) {
     };
 
     function refreshPage() {
-        window.location.reload(false);
+        setTimeout(() => {
+            window.location.reload(false);
+        }, 1750);
+       
       }
 
     function mapConfirm() {
@@ -34,9 +40,21 @@ export default function Basket(props) {
 
         refreshPage();
     }
-
+    
     function rConfirm(data) {
         
+        let orderData = {
+            id : data.id,
+            name : data.name,
+            imageURL : data.imageURL,
+            quantity : data.qty,
+            price : data.price,
+            vendorMail : data.vendorMail,
+            completed: false,
+            cusMail : user.email
+        }
+        console.log("hi");
+        saveOrder(orderData);
         
         let nData = {
             id : data.id,
@@ -45,7 +63,9 @@ export default function Basket(props) {
             imageURL : data.imageURL,
             quantity : data.quantity,
             price : data.price,
+            vendorMail : data.vendorMail
         }
+
 
         //console.log(exist.qty);
         const checkID = data.id;
@@ -61,10 +81,10 @@ export default function Basket(props) {
         if (nData.quantity === 0) {
             deleteItem(nData);
         }
-
-
         
     }
+
+
 
     const saveItem = async (data) => {
         const sfDocRef = doc(firestore, "products", data.id);
@@ -77,7 +97,7 @@ export default function Basket(props) {
                 }
                 
                 transaction.update(sfDocRef, { description: data.description, name: data.name,
-                imageURL : data.imageURL, quantity: data.quantity, price: data.price});
+                imageURL : data.imageURL, quantity: data.quantity, price: data.price, vendorMail: data.vendorMail});
 
             });
             console.log("Transaction successfully committed!");
@@ -87,6 +107,8 @@ export default function Basket(props) {
 
         
     };
+
+
 
 
     return <aside  className= "block col-1" >

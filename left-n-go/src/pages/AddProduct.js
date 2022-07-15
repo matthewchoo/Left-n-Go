@@ -1,6 +1,7 @@
 import { InputLabel, Button, TextField, NativeSelect, Grid } from "@mui/material";
 import { AttachMoney } from "@mui/icons-material";
 import { useState } from "react";
+import { useAuth } from "../hooks/useAuth";
 
 import { Link } from 'react-router-dom';
 
@@ -15,7 +16,8 @@ const AddProduct = () => {
     const [ description, setDescription ] = useState('');
     const [ price, setPrice ] = useState('');
     const [ quantity, setQuantity ] = useState(1);
-    
+    const { user } = useAuth();
+
     //images
     const [ imageAsset, setImageAsset ] = useState(null);
     const [ imageName, setImageName ] = useState('');
@@ -95,6 +97,7 @@ const AddProduct = () => {
                     imageURL : imageAsset,
                     quantity : quantity,
                     price : price,
+                    vendorMail: user.email
 
                     //To add in user's email to identify and fetch data
                 }
