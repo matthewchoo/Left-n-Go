@@ -2,22 +2,91 @@
 import MButton from './MButton';
 import React, {useState} from 'react';
 import Modal from './Modal';
-
+import { firestore } from "../config/firebaseConfig";
+import { deleteDoc, doc, runTransaction } from "firebase/firestore";
 import { ModalBody, ModalFooter, ModalHeader } from './Modal';
 
 
 
 
+
 export default function Basket(props) {
-    const {cartItems, onAdd, onRemove} = props;
+    const {cartItems, onAdd, onRemove, products} = props;
     const itemsPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
     const taxPrice = itemsPrice * 0.17;
     const totalPrice = itemsPrice + taxPrice;
     const [showModal, setShowModal] = useState(false);
 
+    const deleteItem = async (data) => {
+        await deleteDoc(doc(firestore, "products", data.id));
+        
+    };
+
+    function refreshPage() {
+        window.location.reload(false);
+      }
+
+    function mapConfirm() {
+
+        cartItems.map((item) => (
+            rConfirm(item)
+        ))
+
+        refreshPage();
+    }
+
+    function rConfirm(data) {
+        
+        
+        let nData = {
+            id : data.id,
+            name : data.name,
+            description : data.description,
+            imageURL : data.imageURL,
+            quantity : data.quantity,
+            price : data.price,
+        }
+
+        //console.log(exist.qty);
+        const checkID = data.id;
+        console.log(checkID);
+        console.log(data.id);
+        console.log(data.qty);
+        products.map((x) =>
+            x.id === checkID ? nData.quantity = x.quantity - data.qty : x 
+        );
+        console.log(nData);
+        saveItem(nData);
+
+        if (nData.quantity === 0) {
+            deleteItem(nData);
+        }
 
 
-    
+        
+    }
+
+    const saveItem = async (data) => {
+        const sfDocRef = doc(firestore, "products", data.id);
+
+        try {
+            await runTransaction(firestore, async (transaction ) => {
+                const sfDoc = await transaction.get(sfDocRef);
+                if (!sfDoc.exists()) {
+                    throw new Error("ID does not exist!");
+                }
+                
+                transaction.update(sfDocRef, { description: data.description, name: data.name,
+                imageURL : data.imageURL, quantity: data.quantity, price: data.price});
+
+            });
+            console.log("Transaction successfully committed!");
+        } catch (e) {
+            console.log("Transaction failed: ", e);
+        }
+
+        
+    };
 
 
     return <aside  className= "block col-1" >
@@ -100,7 +169,7 @@ export default function Basket(props) {
 
                         
                             
-                            <MButton onClick={() => setShowModal(false)} >
+                            <MButton onClick={() => {setShowModal(false) ; mapConfirm(); }} >
                                 Confirm
                             </MButton>
 

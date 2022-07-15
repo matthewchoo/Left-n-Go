@@ -22,8 +22,10 @@ const Home = (props) => {
     //const products = data;
 
     // console.log(products)
-
     const [cartItems, setCartItems] = useState([]);
+
+
+
     const onAdd = (product) => {
         
         const exist = cartItems.find(x => x.id === product.id);
@@ -59,7 +61,7 @@ const Home = (props) => {
                 <div className="HeaderBox" style={{flex: 1}}>
                     <div className="row">
                         <Main onAdd={onAdd} products={products}></Main>
-                        <Basket onAdd={onAdd} onRemove={onRemove} cartItems={cartItems}></Basket>
+                        <Basket onAdd={onAdd} onRemove={onRemove} cartItems={cartItems} products ={products}></Basket>
                     </div>
                 </div>
 
