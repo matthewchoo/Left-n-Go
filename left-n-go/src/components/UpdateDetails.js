@@ -1,49 +1,96 @@
 import { Input, InputLabel, Button } from "@mui/material"
 import { useState } from "react"
-import { useAuth } from "../hooks/useAuth"
+// import { Redirect } from "react-router-dom";
+// import { useAuth } from "../hooks/useAuth"
+import { useProvideAuth } from "../hooks/useProvideAuth";
 
 //To pass in the db function, changeEmail/change pass function
 //isPassword (determines the text field type), function() -> change email/pw
 //submit will be the function
 export default function UpdateDetails({ isPassword, handleFunction }) {
-    const { user } = useAuth();
+    // const { user } = useAuth();
+    const { error, reauthenticate } = useProvideAuth();
 
     const [ data, setData ] = useState('')
     const [ confirmData, setConfirmData ] = useState('')
+    const [ password, setPassword ] = useState('')
+    const [ warning, setWarning ] = useState('')
 
-    const handleSubmit = () => {
 
-        //Need to reauthenticate user
+    const handleSubmit = (e) => {
+        e.preventDefault()
 
-        // handleFunction(data)
+        if (data.trim() !== confirmData.trim()) {
+            isPassword ? setWarning("Password do not match") : setWarning('Email do not match')
+        } else if (isPassword && data.toString().length < 6) {
+            setWarning ("Password have to be more than 6 characters")
+        } else {
+            setWarning('')
+
+            reauthenticate(password)
+            
+            handleFunction(data);
+
+            if (!error) {
+                setTimeout(() => {
+                    isPassword ? setWarning("Successfully changed Password") : setWarning("Successfully changed Email")
+                }, 4000)
+                clearData()
+            } 
+            
+            console.log(error)
+
+            // if (error === "Firebase: Error (auth/wrong-password).") {
+            //     setTimeout(() => {
+            //        setWarning("Wrong password");
+            //     }, 4000)
+            // }
+        }
+        //handleFunction(data)
     }
 
-    console.log(user.email)
+    const clearData = () => {
+        setData('')
+        setConfirmData('')
+        setPassword('')
+    }
+
+    console.log("isPassword: ", isPassword)
+    console.log("data: ", data)
+    console.log("confirm: ",confirmData)
+    console.log("pw: ", password)
+
   return (
     <form>
+
+        { error && <h3 style={{color: "red"}}>{ error }</h3>}
+        { warning && <h3 style={{color: "red"}}>{ warning }</h3> }
         <InputLabel htmlFor="email" style={{fontSize: "15px", marginBottom: '10px'}}>
-            <span>Enter New Email: </span>
+            <span>{ isPassword ? "Enter New Password: " : "Enter New Email: "} </span>
                 <Input sx={{width:'20ch'}}
-                // type={emailValues.showPassword ? "text" : "password"}
-                //Upon onChange event, the email is setted.
-                value={"123"}
+                type={ isPassword ? "password" : "text" }
+
+                value={data} 
+                onChange={(e) => setData(e.target.value)}
                 ></Input>                   
         </InputLabel>
+
         <InputLabel htmlFor="email" style={{fontSize: "15px", marginBottom: '10px'}}>
-            <span>Confirm New Email: </span>
+            <span>{ isPassword ? "Confirm New Password: " : "Confirm New Email: "} </span>
                 <Input sx={{width:'20ch'}}
-                // type={emailValues.showPassword ? "text" : "password"}
-                //Upon onChange event, the email is setted.
-                value={"123"}
+                type={ isPassword ? "password" : "text" }
+
+                value={confirmData} 
+                onChange={(e) => setConfirmData(e.target.value)}
                 ></Input>                   
         </InputLabel>
         <InputLabel htmlFor="email" style={{fontSize: "15px"}}>
             <span>Enter Password: </span>
                 <Input sx={{width:'20ch'}}
-                // type={emailValues.showPassword ? "text" : "password"}
-                //Upon onChange event, the email is setted.
-                value={"123"}
+        
                 type="password"
+                value={password} 
+                onChange={(e) => setPassword(e.target.value)}
                 ></Input>                   
         </InputLabel>
         <div style={{width: '100%', display:"flex", justifyContent:'center'}}>
@@ -54,7 +101,7 @@ export default function UpdateDetails({ isPassword, handleFunction }) {
                     sx={{
                         width:'25ch',
                     }}
-                    onClick={() => {}}
+                    onClick={handleSubmit}
                     >Submit</Button>
         </div>
     </form>

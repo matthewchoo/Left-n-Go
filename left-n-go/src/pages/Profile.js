@@ -11,8 +11,8 @@ import { useProvideAuth } from "../hooks/useProvideAuth";
 
 const Profile = () => {
     const { user, userType } = useAuth();
-    const { error, changeEmail } = useProvideAuth()
-    const [ errMsg, setErrMsg ] = useState(error)
+    const { error, changeEmail, changePassword } = useProvideAuth()
+    // const [ errMsg, setErrMsg ] = useState(error)
 
     const handleEmailChange = (newEmail) => {
         changeEmail(newEmail)
@@ -22,27 +22,70 @@ const Profile = () => {
 
         updateDoc(docRef, {
             email: newEmail
-        }).then(() => {
-            console.log("Sucessfully update db")
-            setErrMsg("Success")
-        })        
-        
+        })
+        // .then(() => {
+        //     // console.log("Sucessfully update db")
+        //     setErrMsg("Successfully changed email")
+
+        //     setTimeout(() => {
+        //         setErrMsg('');
+        //         }, 4000)
+        // })        
+        // handleEmailClose()
     }
 
+    const handlePasswordChange = (newPassword) => {
+        changePassword(newPassword)
+
+        // setErrMsg("Successfully changed password")
+        //     // handleClose()
+
+        //     setTimeout(() => {
+        //         setErrMsg('');
+        //     }, 4000)
+
+        // const docRef = doc(firestore, 'users', user.uid)
+        //         console.log("docRef: ", docRef)
+
+        // updateDoc(docRef, {
+        //     email: newPassword
+        // }).then(() => {
+        //     console.log("Sucessfully update db")
+        //     setErrMsg("Success")
+        // })
+        // handleClose()        
+    }
+
+    const [emailOpen, setEmailOpen] = useState(false);
     const [open, setOpen] = useState(false);
+
+    //Open Email Modal
+    const handleEmailOpen = () => {
+        setEmailOpen(true);
+    }
+
+    //Close Email Modal
+    const handleEmailClose = () => {
+        setEmailOpen(false);
+    }
+
+    //Open PW Modal
     const handleOpen = () => {
         setOpen(true);
     }
+
+    //Close PW Modal
     const handleClose = () => {
         setOpen(false);
     }
+
 
     const style = {
         position: 'absolute',
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: 400,
+        width: 420,
         bgcolor: 'background.paper',
         border: '2px solid #000',
         boxShadow: 24,
@@ -62,8 +105,10 @@ const Profile = () => {
                 </div> 
             } */}
 
-            { errMsg && <h3 style={{color: "red"}}>{ errMsg }</h3>}
-            
+            {/* { errMsg && <h3 style={{color: "red"}}>{ errMsg }</h3>} */}
+
+            {/* { error && <h3 style={{color: "red"}}>{ error }</h3>} */}
+
             <div className="user-email-profile">
                 <h1>Email: { user.email }</h1>
                 <Button 
@@ -73,15 +118,13 @@ const Profile = () => {
                     sx={{
                         width:'25ch',
                     }}
-                    onClick={handleOpen}
+                    onClick={handleEmailOpen}
                     >Change Email</Button>
                 <Modal
-                    open={open}
-                    onClose={handleClose}
-                    aria-labelledby="parent-modal-title"
-                    aria-describedby="parent-modal-description"
+                    open={emailOpen}
+                    onClose={handleEmailClose}
                     >
-                    <Box sx={{ ...style, width: 400 }}>
+                    <Box sx={{ ...style, width: 420 }}>
                         <UpdateDetails isPassword={false} handleFunction={handleEmailChange} />     
                     </Box>
                 </Modal>
@@ -111,8 +154,8 @@ const Profile = () => {
                     aria-labelledby="parent-modal-title"
                     aria-describedby="parent-modal-description"
                     >
-                    <Box sx={{ ...style, width: 400 }}>
-                        <UpdateDetails />    
+                    <Box sx={{ ...style, width: 420 }}>
+                        <UpdateDetails isPassword={true} handleFunction={handlePasswordChange} />
                     </Box>
                 </Modal>
             </div>

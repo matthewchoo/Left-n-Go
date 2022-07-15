@@ -1,6 +1,9 @@
 import { GoogleAuthProvider, signInWithPopup, GithubAuthProvider, 
     signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged
-    , updateEmail  } from "firebase/auth";
+    , updateEmail,  
+    EmailAuthProvider,
+    reauthenticateWithCredential,
+    updatePassword} from "firebase/auth";
 import { auth, useAuth } from "./useAuth";
 import { useEffect, useState } from "react";
 
@@ -163,7 +166,48 @@ export function useProvideAuth() {
         
             return { error, changeEmail }
     }
+
+    const changePassword = (newPassword) => {
+      setError(null)
+      updatePassword(auth.currentUser, newPassword)
+        .then((response) => {
+          setUser(response.user)
+        })
+        .catch((err) => {
+          setError(err.message)
+        })
+
+      return { error, changePassword }
+    }
   
+    const reauthenticate = (password) => {
+      setError(null)
+      const credential = EmailAuthProvider.credential(
+          auth.currentUser.email,
+          password
+      )
+      
+      console.log(credential)
+
+      reauthenticateWithCredential(
+          auth.currentUser,
+          credential
+      ).then((response) => {
+        setUser(response.user)
+        const docRef = doc(firestore, 'users', response.user.uid)
+        // console.log(response.user.uid)
+
+        getDoc(docRef).then((snapshot) => {
+            dispatch({ type: 'LOGIN', payload: response.user, userType: snapshot.data().userType })
+        })
+          // console.log("re-auth success")
+      }).catch((err) => {
+          setError(err.message)
+      })
+
+      return { error, reauthenticate }
+    }
+
     // Subscribe to user on mount
     // Because this sets state in the callback it will cause any ...
     // ... component that utilizes this hook to re-render with the ...
@@ -190,6 +234,8 @@ export function useProvideAuth() {
       confirmPasswordReset,
       signInWithGoogle,
       signInWithGitHub,
-      changeEmail
+      changeEmail,
+      changePassword,
+      reauthenticate
     };
   }
