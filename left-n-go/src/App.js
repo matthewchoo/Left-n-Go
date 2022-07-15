@@ -105,7 +105,7 @@ function App() {
             </Route>
 
             <Route path="/register">
-              <Register />
+              { user ? <Redirect to="/home"/> : <Register /> }
             </Route>
             
             <Route path="*"> {/* Catchall Route for route that doesn't exist on top. */}

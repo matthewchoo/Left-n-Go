@@ -115,12 +115,15 @@ export default function Navbar(props) {
 
             {/* Right align */}
             <div className="links">
-                <Link to="/register">Register</Link>
-                <Link to="/cart">Cart {' '}
-                    {countCartItems ? ( 
-                        <button className="badge">{ countCartItems }</button>
-                    ): ''}
-                    </Link>     
+                { user ? 
+                    <Link to="/cart">Cart {' '}
+                        {countCartItems ? ( 
+                            <button className="badge">{ countCartItems }</button>
+                        ): ''}
+                        </Link> :
+                    
+                    <Link to="/register">Register</Link>
+                }    
 
                     { user ? <><Redirect to="/home"/><ProfileIcon /></> : <Link to="/login">Sign In</Link> }
               {/* { user ? <Link to="/login">Sign In</Link> : <Link to="/notfound">TryOut</Link> } */}
