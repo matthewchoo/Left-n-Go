@@ -55,10 +55,10 @@ export default function UpdateDetails({ isPassword, handleFunction }) {
         setPassword('')
     }
 
-    console.log("isPassword: ", isPassword)
-    console.log("data: ", data)
-    console.log("confirm: ",confirmData)
-    console.log("pw: ", password)
+    // console.log("isPassword: ", isPassword)
+    // console.log("data: ", data)
+    // console.log("confirm: ",confirmData)
+    // console.log("pw: ", password)
 
   return (
     <form>
