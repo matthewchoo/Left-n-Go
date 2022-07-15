@@ -153,11 +153,9 @@ export function useProvideAuth() {
         updateEmail(auth.currentUser, newEmail)
             .then((response) => {
                 setUser(response.user)
-                const data = {
-                    uid : response.user.uid,
-                    email : response.user.email,
-                }
-                saveItem(response.user.uid, data)
+                // collection(firestore, 'users').doc(response.user.uid).update({
+                //     email: newEmail
+                // })
             })
             .catch((err) => {
                 setError(err.message)
