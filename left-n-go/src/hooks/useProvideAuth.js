@@ -39,7 +39,7 @@ export function useProvideAuth() {
             //to fetch uid here. If userType == null, set userType here
             setUser(response.user)
             const docRef = doc(firestore, 'users', response.user.uid)
-            console.log(response.user.uid)
+            // console.log(response.user.uid)
 
             getDoc(docRef).then((snapshot) => {
                 // uType = snapshot.data().userType
@@ -187,7 +187,7 @@ export function useProvideAuth() {
           password
       )
       
-      console.log(credential)
+      // console.log(credential)
 
       reauthenticateWithCredential(
           auth.currentUser,
