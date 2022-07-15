@@ -116,7 +116,7 @@ export default function Navbar(props) {
             {/* Right align */}
             <div className="links">
                 <Link to="/register">Register</Link>
-                <Link to="/cart"> {' '}
+                <Link to="/cart">Cart {' '}
                     {countCartItems ? ( 
                         <button className="badge">{ countCartItems }</button>
                     ): ''}
