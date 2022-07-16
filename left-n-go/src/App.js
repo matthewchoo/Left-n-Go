@@ -10,6 +10,7 @@ import HomeVendor from './pages/HomeVendor'
 import AddProduct from './pages/AddProduct';
 import UpdateProduct from './pages/UpdateProduct';
 import DeleteProduct from './pages/DeleteProduct';
+import HomeAdmin from './pages/HomeAdmin';
 // import data from './data';
 
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
@@ -21,6 +22,7 @@ import { useAuth } from './hooks/useAuth';
 // import { useState, useEffect } from 'react';
 import { useCollection } from './hooks/useCollection';
 import Register from './pages/Register';
+
 
 function App() {
   const { user, userType } = useAuth();
@@ -106,6 +108,10 @@ function App() {
 
             <Route path="/register">
               { user ? <Redirect to="/home"/> : <Register /> }
+            </Route>
+
+            <Route path="/HomeAdmin">
+              <HomeAdmin orders = {orders}></HomeAdmin>
             </Route>
             
             <Route path="*"> {/* Catchall Route for route that doesn't exist on top. */}
