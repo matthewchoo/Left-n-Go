@@ -1,14 +1,36 @@
-
-
+import {  firestore } from "../config/firebaseConfig";
+import { collection, query, where, getDocs} from "firebase/firestore";
+import { useAuth } from "../hooks/useAuth";
+import { useState, useEffect } from "react";
 
 const Cart = (props) => {
 
+    const [ orDe , setOrders] = useState([])
+    const { user } = useAuth();
     const orders = props.orders;
+    
+    
+    const specficItems = async (cMail) => {
+        const q = query(collection(firestore,"orders"), where("cusMail","==",cMail));
+        const querySnapshot = await getDocs(q)
+        querySnapshot.forEach((doc) =>{
+            console.log(doc.data())
+            
+        });
+
+        
+    };
+    
+    
+    
 
     return ( 
+        
         <div className ="container-app">
+            
             <h1 className="ordersHeader">ORDERS</h1>
-            {orders.map( (x) => {
+            
+            {   specficItems(user.email).map( (x) => {
                 const a = x.name
                 const boxColour = x.completed ? 'green' : 'blue'
                 const checker = x.completed ? 'Collected:' : '[Paid] To Collect:'
