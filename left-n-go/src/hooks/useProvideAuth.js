@@ -195,10 +195,12 @@ export function useProvideAuth() {
       ).then((response) => {
         setUser(response.user)
         const docRef = doc(firestore, 'users', response.user.uid)
+        setError("Successfully authenticated")
         // console.log(response.user.uid)
 
         getDoc(docRef).then((snapshot) => {
             dispatch({ type: 'LOGIN', payload: response.user, userType: snapshot.data().userType })
+        
         })
           // console.log("re-auth success")
       }).catch((err) => {

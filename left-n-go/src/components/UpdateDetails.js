@@ -28,17 +28,27 @@ export default function UpdateDetails({ isPassword, handleFunction }) {
             setWarning('')
 
             reauthenticate(password)
-            
-            handleFunction(data);
 
-            if (!error) {
+            if (error === "Successfully authenticated") {
+                console.log("function invoked")
+                handleFunction(data);
+    
                 setTimeout(() => {
                     isPassword ? setWarning("Successfully changed Password") : setWarning("Successfully changed Email")
                 }, 4000)
                 clearData()
-            } 
-            
-            console.log(error)
+            }
+
+            //console.log(error)
+
+            // if (!error) {
+            //     handleFunction(data);
+    
+            //     setTimeout(() => {
+            //         isPassword ? setWarning("Successfully changed Password") : setWarning("Successfully changed Email")
+            //     }, 4000)
+            //     clearData()
+            // }
 
             // if (error === "Firebase: Error (auth/wrong-password).") {
             //     setTimeout(() => {
@@ -46,7 +56,6 @@ export default function UpdateDetails({ isPassword, handleFunction }) {
             //     }, 4000)
             // }
         }
-        //handleFunction(data)
     }
 
     const clearData = () => {
