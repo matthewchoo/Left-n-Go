@@ -1,27 +1,43 @@
-import {  firestore } from "../config/firebaseConfig";
-import { collection, query, where, getDocs} from "firebase/firestore";
+// import {  firestore } from "../config/firebaseConfig";
+// import { collection, query, where, getDocs, onSnapshot} from "firebase/firestore";
 import { useAuth } from "../hooks/useAuth";
-import { useState, useEffect } from "react";
+// import { useState } from "react";
+import { useCollection } from "../hooks/useCollection";
 
 const Cart = (props) => {
 
-    const [ orDe , setOrders] = useState([])
+    // const [ orDe , setOrders] = useState([])
     const { user } = useAuth();
-    const orders = props.orders;
-    
-    
-    const specficItems = async (cMail) => {
-        const q = query(collection(firestore,"orders"), where("cusMail","==",cMail));
-        const querySnapshot = await getDocs(q)
-        querySnapshot.forEach((doc) =>{
-            console.log(doc.data())
-            
-        });
+    // const orders = props.orders;
 
-        
-    };
+    const q = ["cusMail", "==", user.email];
+
+    const { documents: ordersFetched } = useCollection("orders", q);
     
-    
+    // const specficItems = async (cMail) => {
+    //     const q = query(collection(firestore,"orders"), where("cusMail","==",cMail));
+    //     // const querySnapshot = await getDocs(q)
+    //     // let results = []
+
+    //     // querySnapshot.forEach((doc) =>{
+    //     //     console.log(doc.data())
+    //     //     // results.push({...doc.data(), id: doc.cMail})
+    //     // });
+
+    //     onSnapshot(q, (snapshot) => {
+    //         let results = []
+    //         snapshot.docs.forEach(doc => {
+    //             console.log(doc.data())
+    //             results.push({...doc.data(), id: doc.id})
+    //             console.log("results", results)
+    //         })
+    //         setOrders(results)
+    //     })
+
+    //     // setOrders(results)
+    // };
+
+    // console.log("order", orDe)
     
 
     return ( 
@@ -29,8 +45,9 @@ const Cart = (props) => {
         <div className ="container-app">
             
             <h1 className="ordersHeader">ORDERS</h1>
+            {/* specficItems(user.email).map */}
             
-            {   specficItems(user.email).map( (x) => {
+            {   ordersFetched.map( (x) => {
                 const a = x.name
                 const boxColour = x.completed ? 'green' : 'blue'
                 const checker = x.completed ? 'Collected:' : '[Paid] To Collect:'

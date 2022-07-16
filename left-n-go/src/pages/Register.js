@@ -43,12 +43,12 @@ const Register = () => {
     //password should be at least 6 characters
 
 
-      console.log("The email is : ", emailValues.email)
-      console.log("The password is : ", passValues.password)
-      console.log("The confirmPass is : ", confirmPass)
-      console.log("The userType is : ", userType)
-      console.log(passValues.password.trim() === confirmPass.trim())
-      console.log(confirmPass.toString().length)
+    //   console.log("The email is : ", emailValues.email)
+    //   console.log("The password is : ", passValues.password)
+    //   console.log("The confirmPass is : ", confirmPass)
+    //   console.log("The userType is : ", userType)
+    //   console.log(passValues.password.trim() === confirmPass.trim())
+    //   console.log(confirmPass.toString().length)
   
       function handleSubmit(event) {
         event.preventDefault();

@@ -8,10 +8,6 @@ import { ModalBody, ModalFooter, ModalHeader } from './Modal';
 import { useAuth } from "../hooks/useAuth";
 
 
-
-
-
-
 export default function Basket(props) {
     const {cartItems, onAdd, onRemove, products} = props;
     const itemsPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);

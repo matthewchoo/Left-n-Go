@@ -14,8 +14,6 @@ const DeleteProduct = (props) => {
 
     const [foodID, setID] = useState('');
     
-
-
     const [ fields, setFields ] = useState(false);
     //const [ alertStatus, setAlertStatus ] = useState('danger');
     const [ msg, setMsg ] = useState(null);
