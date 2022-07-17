@@ -32,8 +32,6 @@ export default function MainAdmin(props) {
                             Qty: {x.quantity}
                         </h4>
                     <h2 ><img className="wrap" src={ x.imageURL } alt={x.name}></img>
-                    
-                    
                     </h2>
                     </div>
                 )
