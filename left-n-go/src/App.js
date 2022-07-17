@@ -68,11 +68,13 @@ function App() {
             <Route exact path="/">
               <Home products={ products }/>
               { user && userType === "Admin" && <MainAdmin /> }
+              { user && userType === "Vendor" && <HomeVendor products={ products }/> }
               {/* <Home /> */}
             </Route>
             <Route path="/home">
               <Home products={ products }/>
               { user && userType === "Admin" && <MainAdmin /> }
+              { user && userType === "Vendor" && <HomeVendor products={ products }/> }
               {/* <Home /> */}
             </Route>
             <Route path="/cart">
@@ -104,10 +106,10 @@ function App() {
             <Route path="/deleteProduct">
               <DeleteProduct products={products}/>
             </Route>
-            <Route path="/HomeVendor">
+
+            {/* <Route path="/HomeVendor">
               <HomeVendor products={ products }/>
-              {/* <Home /> */}
-            </Route>
+            </Route> */}
 
             <Route path="/register">
               { user ? <Redirect to="/home"/> : <Register /> }
