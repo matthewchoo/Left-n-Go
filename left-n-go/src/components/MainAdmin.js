@@ -3,10 +3,10 @@ import { useCollection } from "../hooks/useCollection";
 
 export default function MainAdmin(props) {
 
-    const {orders} = props;
+    // const {orders} = props;
     const { documents: ordersFetched } = useCollection("orders");
     
-    console.log(orders)
+    // console.log(orders)
     return ( 
         <main className = "block col-2">
         <div className ="container-app">
@@ -27,11 +27,10 @@ export default function MainAdmin(props) {
                     <div>
                     <strong> Sold to {x.cusMail}</strong> 
                     </div>
-                    <h3>{a}
+                    <h3>{a}</h3>
                         <h4>
                             Qty: {x.quantity}
                         </h4>
-                    </h3>
                     <h2 ><img className="wrap" src={ x.imageURL } alt={x.name}></img>
                     
                     

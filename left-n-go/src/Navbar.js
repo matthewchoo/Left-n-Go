@@ -99,8 +99,9 @@ import { useAuth } from "./hooks/useAuth";
 import ProfileIcon from './components/ProfileIcon';
 
 export default function Navbar(props) {
-    const { user } = useAuth();
+    const { user, userType } = useAuth();
     const { countCartItems } = props;
+    
     return ( 
         <nav className="navbar">
             {/* Left align */}

@@ -4,7 +4,7 @@ import ProductVendor from './ProductVendor';
 
 export default function MainVendor(props) {
     const {onAdd} = props;
-    console.log(props)
+    // console.log(props)
     
     const rows = [...Array(Math.ceil(props.products.length/3))]
 

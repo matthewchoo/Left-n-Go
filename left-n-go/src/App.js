@@ -77,15 +77,26 @@ function App() {
               { user && userType === "Vendor" && <HomeVendor products={ products }/> }
               {/* <Home /> */}
             </Route>
+
+            {/* If no users, redirect to home */}
             <Route path="/cart">
-              <Cart orders = {orders}/>
+              { !user ? <Redirect to="/home"/> : <Cart orders = {orders}/> }
             </Route>
+
+            {/* If there is an user, redirect to home */}
             <Route path="/login">
               { user ? <Redirect to="/home"/> : <Login /> }
             </Route>
+
+            {/* If no users, redirect to home */}
             <Route path="/logout">
-              <Logout />
+              { !user ? <Redirect to="/home"/> : <Logout /> }
             </Route>
+
+            <Route path="/register">
+              { user ? <Redirect to="/home"/> : <Register /> }
+            </Route>
+
             {/* <Route path="/vendorProfile">
               { user && userType === "Vendor" && <ProfileVendor /> }
               { user && userType === "Admin" && <ProfileVendor /> }
@@ -97,27 +108,28 @@ function App() {
               { user && userType === "Admin" && <Profile /> }
               { !user && <Redirect to="/home"/> }
             </Route>
+
+            {/* Admin and Vendors can access, only upon login */}
             <Route path="/addProduct">
-              <AddProduct />
+              { (!user || userType === "Cust") ? <Redirect to="/home"/> : <AddProduct /> }
+              {/* <AddProduct /> */}
             </Route>
             <Route path="/updateProduct">
-              <UpdateProduct products={products}/>
+            { (!user || userType === "Cust") ? <Redirect to="/home"/> : <UpdateProduct products={products}/> }
+              {/* <UpdateProduct products={products}/> */}
             </Route>
             <Route path="/deleteProduct">
-              <DeleteProduct products={products}/>
+            { (!user || userType === "Cust") ? <Redirect to="/home"/> : <DeleteProduct products={products}/> }
+              {/* <DeleteProduct products={products}/> */}
             </Route>
 
             {/* <Route path="/HomeVendor">
               <HomeVendor products={ products }/>
             </Route> */}
 
-            <Route path="/register">
-              { user ? <Redirect to="/home"/> : <Register /> }
-            </Route>
-
-            <Route path="/HomeAdmin">
+            {/* <Route path="/HomeAdmin">
               <HomeAdmin orders = {orders}></HomeAdmin>
-            </Route>
+            </Route> */}
             
             <Route path="*"> {/* Catchall Route for route that doesn't exist on top. */}
               <NotFound />

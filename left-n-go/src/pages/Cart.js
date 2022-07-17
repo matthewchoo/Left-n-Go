@@ -56,15 +56,10 @@ const Cart = (props) => {
                     <strong>{checker} from {x.vendorMail}</strong> 
                     
                     <h2 ><img className="wrap" src={ x.imageURL } alt={x.name}></img>
-                    <h3 style={{display:"inline"}} className="cartText">{a}
-                        <h4>
-                        
-                            Qty: {x.quantity}
-                        </h4>
-                            
-                        
-                    </h3> 
-                    
+                    <p style={{display:"inline"}} className="cartText">
+                        {a} <br />  
+                        Qty: {x.quantity}
+                    </p> 
                     </h2>
                     </div>
                 )

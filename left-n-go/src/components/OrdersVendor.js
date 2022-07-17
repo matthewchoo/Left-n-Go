@@ -9,8 +9,9 @@ export default function OrdersVendor() {
     //const q = ["vendorMail", "==", user.email];
     //const { documents: ordersFetched } = useCollection("orders",q);
     const { documents: ordersFetched } = useCollection("orders");
-    console.log("hi")
-    console.log(ordersFetched)
+    
+    // console.log("hi")
+    // console.log(ordersFetched)
     return (
 
     <div className="checkList">

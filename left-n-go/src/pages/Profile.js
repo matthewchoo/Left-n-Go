@@ -159,14 +159,14 @@ const Profile = () => {
                     </Box>
                 </Modal>
             </div>
-            <div className="add-products">
+            {/* <div className="add-products">
                 <Button size="large" 
                 variant="outlined" 
                 style={{marginBottom: '20px'}}
                 sx={{
                     width:'25ch',
                 }}><Link to='/addProduct'>Add Products</Link></Button>
-            </div>
+            </div> */}
             {/* <p>To be Continued.</p> */}
             <p><Link to='/'>Back to the homepage...</Link></p>
 

@@ -1,8 +1,9 @@
-import React, { useEffect, useContext, createContext, useReducer } from "react";
+import React, { useEffect, useContext, createContext, useReducer, useRef } from "react";
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig, firestore } from "../config/firebaseConfig";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
+import { useMemo } from "react";
 // import ( firebaseConfig ) from "../config/firebaseConfig";
 // import { getAuth, GoogleAuthProvider, signInWithPopup, GithubAuthProvider, 
 //     signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged  } from "firebase/auth";
@@ -45,7 +46,6 @@ export function ProvideAuth({ children }) {
     userType: null,
   })
 
-
   useEffect(() => {
       const unsub = onAuthStateChanged(auth, user => {
 
@@ -66,11 +66,18 @@ export function ProvideAuth({ children }) {
   }, [])
 
 // console.log('AuthContext state: ', _auth )
+
 console.log('AuthContext state: ', state)
+// console.log("User: ", state.user)
+
+// window.localStorage.setItem("USER_STORAGE", JSON.stringify(state))
 // console.log('AuthContext userType: ', state.userType)
 
   return <authContext.Provider value={{ ...state, dispatch }}>{children}</authContext.Provider>;
 }
+
+export const ProvidesAuth = React.memo(ProvideAuth);
+
 // Hook for child components to get the auth object ...
 // ... and re-render when it changes.
 export const useAuth = () => {
