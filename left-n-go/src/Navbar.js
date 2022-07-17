@@ -101,7 +101,6 @@ import ProfileIcon from './components/ProfileIcon';
 export default function Navbar(props) {
     const { user, userType } = useAuth();
     const { countCartItems } = props;
-    
     return ( 
         <nav className="navbar">
             {/* Left align */}
@@ -115,17 +114,29 @@ export default function Navbar(props) {
             {/* Can switch Left-n-Go into the Logo. */}
 
             {/* Right align */}
-            <div className="links">
-                { user ? 
-                    <Link to="/cart">Cart {' '}
-                        {countCartItems ? ( 
-                            <button className="badge">{ countCartItems }</button>
-                        ): ''}
-                        </Link> :
+            <div className="link">
+                    {/* Cust Navbar */}
+                    { (user && userType === "Cust") && 
+                        <Link to="/cart">Cart {' '}
+                            {countCartItems ? ( 
+                                <button className="badge">{ countCartItems }</button>
+                            ): ''}
+                        </Link> 
+                    }    
                     
-                    <Link to="/register">Register</Link>
-                }    
+                    {/* Vendor Navbar */}
+                    { user && userType === "Vendor" && <Link to="/addProduct">Add Product</Link> }
+                    { user && userType === "Vendor" && <Link to="/updateProduct">Update Product</Link> }
+                    { user && userType === "Vendor" && <Link to="/deleteProduct">Delete Product</Link> }
 
+                    {/* Admin Navbar */}
+                    { user && userType === "Admin" && <Link to="/cart">Cart</Link> }
+                    { user && userType === "Admin" && <Link to="/addProduct">Add Product</Link> }
+                    { user && userType === "Admin" && <Link to="/updateProduct">Update Product</Link> }
+                    { user && userType === "Admin" && <Link to="/deleteProduct">Delete Product</Link> }
+
+
+                    { !user && <Link to="/register">Register</Link> }
                     { user ? <><Redirect to="/home"/><ProfileIcon /></> : <Link to="/login">Sign In</Link> }
               {/* { user ? <Link to="/login">Sign In</Link> : <Link to="/notfound">TryOut</Link> } */}
               {/* <Link to="/login">Sign In</Link> */}  

@@ -90,7 +90,7 @@ function App() {
 
             {/* If no users, redirect to home */}
             <Route path="/logout">
-              { !user ? <Redirect to="/home"/> : <Logout /> }
+              <Logout /> 
             </Route>
 
             <Route path="/register">

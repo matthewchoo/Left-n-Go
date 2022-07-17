@@ -3,6 +3,7 @@ import { Visibility, VisibilityOff, Google, GitHub } from "@mui/icons-material";
 import { useState } from 'react';
 // import { useAuth } from '../hooks/useAuth';
 import { useProvideAuth } from '../hooks/useProvideAuth';
+import { Link } from 'react-router-dom'
 
 // import { useHistory } from "react-router-dom";
 // import { useEffect } from 'react';
@@ -103,7 +104,7 @@ return (
                 </InputAdornment>
                 }
             />
-            <div><Button sx={{width:'29ch'}} 
+            <div style={{marginBottom: "10px"}}><Button sx={{width:'29ch'}} 
             style={
                 {
                     // background: "#f1356d",
@@ -118,12 +119,31 @@ return (
             type="submit"
             >Login</Button></div>
 
+            <div><Button sx={{width:'29ch'}} 
+            style={
+                {
+                    // background: "#f1356d",
+                    background: "#5297FF",
+                    color: "#fff",
+                    border: "0",
+                    padding: "8px",
+                    borderRadius: "10px",
+                    cursor: "pointer",
+                }
+            }
+            component={Link}
+            to="/register"
+            >Register</Button></div>
+            
+            
+
             <div className="otherLogin">
                 <p style={{
                 color: "#000000",
                 marginTop: "30px",
                 textAlign: "center",
                 fontSize: "15px",
+                fontWeight: 'bold'
                 // margin-bottom: 30px;
                 // width: auto;
                 }}>Login with other methods</p>

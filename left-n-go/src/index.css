@@ -35,12 +35,24 @@ code {
   /* color: #f1356d; */
   color: #000000;
 }
-.navbar .links {
+.navbar .link {
   position: absolute;
-  right: 0px;
-  width: 200px;
-
+  right: 50px;
+  /* width: 200px; */
 }
+
+/* .navbar .vendor-link {
+  position: absolute;
+  right: 50px;
+  width: 390px;
+}
+
+.navbar .admin-link {
+  position: absolute;
+  right: 50px;
+  width: 582px;
+} */
+
 .navbar a {
   margin-left: 20px;
   text-decoration: none;
@@ -84,6 +96,17 @@ code {
   text-align: left;
   font-size: 12px;
 }
+
+/* .login .register-button {
+  font-family: "Roboto","Helvetica","Arial",sans-serif;
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.75;
+    letter-spacing: 0.02857em;
+    text-transform: uppercase;
+    min-width: 64px;
+  color: #fff;
+} */
 
 .home, .cart {
   /* max-width: 1400px; */
