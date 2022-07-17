@@ -291,7 +291,7 @@ const AddProduct = () => {
             onClick={ saveDetails }
             >Upload</Button>
             
-            <Link to="/homeVendor">
+            <Link to="/home">
                 <Button sx={{
                     width:'20ch',
                     ':hover' : {

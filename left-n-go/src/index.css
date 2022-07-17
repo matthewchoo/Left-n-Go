@@ -152,6 +152,8 @@ a {
   padding-bottom: 50px;
 }
 
+
+
 .rowBasket {
   display: flex;
   justify-content: space-between;
@@ -183,8 +185,15 @@ img.small {
 }
 
 img.wrap { 
+  height: 15%;
+  width: 15%;
+  border-radius:40%;
+}
+
+img.smallest { 
   height: 50px;
   width: 50px;
+  
 }
 
 img.icon {
@@ -446,6 +455,102 @@ text-align: right;
   padding: 20px 20px;
   position: absolute;
   top: 8px;
+}
+
+.products {
+  display:flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.product-card {
+  flex-basis: 29%;
+  padding: 1%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-top: 2%;
+}
+
+
+
+.product-image img {
+  max-width: 100%;
+  height:150px;
+  transition: .5s ease;
+}
+
+.middle {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 30%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  text-align:center;
+}
+
+
+
+.product-card:hover .middle {
+  opacity:1;
+}
+
+.product-text {
+  background-color: #186d34;
+  color: white;
+  font-size: 16px;
+  padding:16px 32px;
+}
+
+.grow {
+  transition: all .2s ease-in-out;
+}
+
+.grow:hover {
+  transform: scale(1.1);
+}
+
+.containers {
+  padding:5px;
+}
+
+.product-card-vendor {
+  text-align: center;
+  flex-basis: 40%;
+  padding: 1%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  margin-left: 2%;
+  margin-right: 2%;
+  margin-top: 2%;
+}
+
+.products-vendor {
+  display:flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.img.vendor-orders {
+  border: 1 px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
+}
+
+button.rightgreen {
+  flex: 0 0 50%;
+  padding-left: 50px;
+  padding-right: 50px;
+  display:none;
+}
+
+button.rightblue {
+  flex: 0 0 50%;
+  padding-left: 50px;
+  padding-right: 50px;
+  
 }
 
 

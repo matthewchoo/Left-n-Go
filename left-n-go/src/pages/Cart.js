@@ -11,33 +11,11 @@ const Cart = (props) => {
 
     const q = ["cusMail", "==", user.email];
 
+
     const { documents: ordersFetched } = useCollection("orders", q);
     const { documents: allOrdersFetched } = useCollection("orders");
     const orderType = userType === 'Cust' ? ordersFetched : allOrdersFetched
-    // const specficItems = async (cMail) => {
-    //     const q = query(collection(firestore,"orders"), where("cusMail","==",cMail));
-    //     // const querySnapshot = await getDocs(q)
-    //     // let results = []
 
-    //     // querySnapshot.forEach((doc) =>{
-    //     //     console.log(doc.data())
-    //     //     // results.push({...doc.data(), id: doc.cMail})
-    //     // });
-
-    //     onSnapshot(q, (snapshot) => {
-    //         let results = []
-    //         snapshot.docs.forEach(doc => {
-    //             console.log(doc.data())
-    //             results.push({...doc.data(), id: doc.id})
-    //             console.log("results", results)
-    //         })
-    //         setOrders(results)
-    //     })
-
-    //     // setOrders(results)
-    // };
-
-    // console.log("order", orDe)
     
 
     return ( 
@@ -45,7 +23,10 @@ const Cart = (props) => {
         <div className ="container-app">
             
             <h1 className="ordersHeader">ORDERS</h1>
+            <h1 className="ordersHeader"> No. of Orders : {orderType.length}</h1>
+
             {/* specficItems(user.email).map */}
+            
             
 
             {   orderType.map( (x) => {

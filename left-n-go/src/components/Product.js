@@ -7,18 +7,25 @@ export default function Product(props) {
     // console.log(props)
 
     return (
-        <div>
-            {/* Using database's data */}
-            <img width="100px" height="100px" className="small" src={ product.imageURL } alt={product.name}></img>
-
-            {/* Using data from ../data */}
-            {/* <img className="small" src={ product.image } alt={product.name}></img> */}
-            <h3>{ product.name }</h3>
-            <div>${ product.price }</div>
         
-            <div>
-                <button onClick={ () => onAdd(product)}>Add To Cart</button>
+            <div className = "product-card">
+                <div className="product-image">
+                    <img className="small" src={ product.imageURL } alt={product.name}></img>
+                </div>
+                <div className="middle">
+                    <div className="product-text">Hello</div>
+                </div>
+            
+                <div className="product-info">
+                    <h3>{ product.name }</h3>
+                    
+                    <h4>$10</h4>
+                </div>
+                <div>
+                    <button onClick={ () => onAdd(product)}>Add To Cart</button>
+                </div>
             </div>
-        </div>
+        
+        
     )
 }

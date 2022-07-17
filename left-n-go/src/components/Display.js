@@ -1,5 +1,5 @@
 import React from 'react';
-import DisplayProduct from './DisplayProduct';
+
 
 
 export default function Main(props) {
@@ -7,20 +7,39 @@ export default function Main(props) {
     // console.log({products});
 
     // console.log(props);
-    const rows = [...Array(Math.ceil(props.products.length/3))]
+    //const rows = [...Array(Math.ceil(props.products.length/3))]
 
-    const productRows = rows.map ((row,idx) => props.products.slice(idx * 3, idx * 3 + 3));
+    //const productRows = rows.map ((row,idx) => props.products.slice(idx * 3, idx * 3 + 3));
 
-    const content = productRows.map((row, idx) => (
-        <div className="row" key={idx}>
-            {row.map(product => <DisplayProduct key={product.id} product={product}></DisplayProduct> )}
-        </div>
+    const content = props.products.map((product) => (
+        <div className = "product-card-vendor grow" key={product.id}>
+                <div className="containers">
+                    <div className="product-image">
+                        <img className="small" src={ product.imageURL } alt={product.name}></img>
+                        
+                    </div>
+                </div>
+                
+                <div className="product-info">
+                    Name: <strong>{ product.name }</strong>
+                    <br></br>
+                    Product ID: <strong>{product.id}</strong>
+                    <br></br>
+                    Price: <strong>${ product.price }</strong>
+                    <br></br>
+                    Description : <strong>{product.description}</strong>
+                    <br></br>
+                    Quantity Left: <strong>{product.quantity}</strong>
+                    
+                </div>
+
+            </div>
         )
     );
 
     return (
         <main className = "block col-2">
-            <div>
+            <div className="products-vendor">
                 {content}
             </div>
             

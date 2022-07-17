@@ -10,11 +10,13 @@ import { useAuth } from "../hooks/useAuth";
 
 export default function Basket(props) {
     const {cartItems, onAdd, onRemove, products} = props;
+    
     const itemsPrice = cartItems.reduce((a, c) => a + c.price * c.qty, 0);
-    const taxPrice = itemsPrice * 0.17;
-    const totalPrice = itemsPrice + taxPrice;
+    //const taxPrice = itemsPrice * 0.17;
+    const totalPrice = itemsPrice
     const [showModal, setShowModal] = useState(false);
     const { user } = useAuth();
+    
 
     const deleteItem = async (data) => {
         await deleteDoc(doc(firestore, "products", data.id));
@@ -24,7 +26,7 @@ export default function Basket(props) {
     function refreshPage() {
         setTimeout(() => {
             window.location.reload(false);
-        }, 1750);
+        }, 1750 * cartItems.length);
        
       }
 
@@ -146,11 +148,6 @@ export default function Basket(props) {
                     <div className="col-1 text-right">${itemsPrice.toFixed(2)}</div>
                 </div>
 
-                <div className="rowBasket">
-                    <div className="col-2 text-left">Tax Price</div>
-                    <div className="col-1 text-right">${taxPrice.toFixed(2)}</div>
-                </div>
-                
                 <hr></hr>
 
                 <div className="rowBasket">
@@ -173,7 +170,7 @@ export default function Basket(props) {
 
                             {cartItems.map((item) => (
                             <div key={item.id} className = "rowBasket">
-                            <div className="col-2 text-left"><img className="wrap" src={ item.imageURL } alt={item.name}></img> {item.name} : {item.qty} x ${item.price}</div>
+                            <div className="col-2 text-left"><img className="smallest" src={ item.imageURL } alt={item.name}></img> {item.name} : {item.qty} x ${item.price}</div>
                             </div>
                             ))}
                             
