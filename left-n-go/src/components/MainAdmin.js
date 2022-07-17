@@ -5,6 +5,7 @@ export default function MainAdmin(props) {
 
     const {orders} = props;
     const { documents: ordersFetched } = useCollection("orders");
+    
     console.log(orders)
     return ( 
         <main className = "block col-2">
@@ -30,7 +31,7 @@ export default function MainAdmin(props) {
                         <h4>
                             Qty: {x.quantity}
                         </h4>
-                    </h3> 
+                    </h3>
                     <h2 ><img className="wrap" src={ x.imageURL } alt={x.name}></img>
                     
                     

@@ -22,6 +22,7 @@ import { useAuth } from './hooks/useAuth';
 // import { useState, useEffect } from 'react';
 import { useCollection } from './hooks/useCollection';
 import Register from './pages/Register';
+import MainAdmin from './components/MainAdmin';
 
 
 function App() {
@@ -66,10 +67,12 @@ function App() {
           <Switch>
             <Route exact path="/">
               <Home products={ products }/>
+              { user && userType === "Admin" && <MainAdmin /> }
               {/* <Home /> */}
             </Route>
             <Route path="/home">
               <Home products={ products }/>
+              { user && userType === "Admin" && <MainAdmin /> }
               {/* <Home /> */}
             </Route>
             <Route path="/cart">
