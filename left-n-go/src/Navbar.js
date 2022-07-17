@@ -117,7 +117,7 @@ export default function Navbar(props) {
             <div className="link">
                     {/* Cust Navbar */}
                     { (user && userType === "Cust") && 
-                        <Link to="/cart">Cart {' '}
+                        <Link to="/cart">Orders {' '}
                             {countCartItems ? ( 
                                 <button className="badge">{ countCartItems }</button>
                             ): ''}
@@ -130,7 +130,7 @@ export default function Navbar(props) {
                     { user && userType === "Vendor" && <Link to="/deleteProduct">Delete Product</Link> }
 
                     {/* Admin Navbar */}
-                    { user && userType === "Admin" && <Link to="/cart">Cart</Link> }
+                    { user && userType === "Admin" && <Link to="/cart">All Orders</Link> }
                     { user && userType === "Admin" && <Link to="/addProduct">Add Product</Link> }
                     { user && userType === "Admin" && <Link to="/updateProduct">Update Product</Link> }
                     { user && userType === "Admin" && <Link to="/deleteProduct">Delete Product</Link> }

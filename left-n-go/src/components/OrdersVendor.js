@@ -1,14 +1,14 @@
 import React from 'react'
 import { useCollection } from "../hooks/useCollection";
-//import { doc, runTransaction } from "firebase/firestore";
-//import { useAuth } from "../hooks/useAuth";
+
+import { useAuth } from "../hooks/useAuth";
 
 export default function OrdersVendor() {
     //**un comment bottom three lines when routing fixed for vendors */
-    //const { user } = useAuth();
-    //const q = ["vendorMail", "==", user.email];
-    //const { documents: ordersFetched } = useCollection("orders",q);
-    const { documents: ordersFetched } = useCollection("orders");
+    const { user } = useAuth();
+    const q = ["vendorMail", "==", user.email];
+    const { documents: ordersFetched } = useCollection("orders",q);
+    
     
     // console.log("hi")
     // console.log(ordersFetched)

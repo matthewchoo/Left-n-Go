@@ -23,7 +23,7 @@ const Home = (props) => {
 
     // console.log(products)
     const [cartItems, setCartItems] = useState([]);
-
+    
 
 
     const onAdd = (product) => {

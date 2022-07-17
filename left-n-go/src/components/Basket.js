@@ -159,7 +159,7 @@ export default function Basket(props) {
                 </div>
 
                 <div>
-                    <button className="block" onClick={() => setShowModal(true)}>
+                    <button className="block" onClick={() => !user ? alert("Please Login") : setShowModal(true)}>
                         Checkout
                     </button>
 

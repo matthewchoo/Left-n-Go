@@ -1,19 +1,19 @@
 // import {  firestore } from "../config/firebaseConfig";
 // import { collection, query, where, getDocs, onSnapshot} from "firebase/firestore";
 import { useAuth } from "../hooks/useAuth";
-// import { useState } from "react";
 import { useCollection } from "../hooks/useCollection";
 
 const Cart = (props) => {
 
     // const [ orDe , setOrders] = useState([])
-    const { user } = useAuth();
+    const { user, userType } = useAuth();
     // const orders = props.orders;
 
     const q = ["cusMail", "==", user.email];
 
     const { documents: ordersFetched } = useCollection("orders", q);
-    
+    const { documents: allOrdersFetched } = useCollection("orders");
+    const orderType = userType === 'Cust' ? ordersFetched : allOrdersFetched
     // const specficItems = async (cMail) => {
     //     const q = query(collection(firestore,"orders"), where("cusMail","==",cMail));
     //     // const querySnapshot = await getDocs(q)
@@ -47,10 +47,11 @@ const Cart = (props) => {
             <h1 className="ordersHeader">ORDERS</h1>
             {/* specficItems(user.email).map */}
             
-            {   ordersFetched.map( (x) => {
+
+            {   orderType.map( (x) => {
                 const a = x.name
                 const boxColour = x.completed ? 'green' : 'blue'
-                const checker = x.completed ? 'Collected:' : '[Paid] To Collect:'
+                const checker = x.completed ? '[Collected/Paid]:' : '[To Collect]:'
                 return(
                     <div className={"ordersBox" + boxColour} key={x.id}>
                     <strong>{checker} from {x.vendorMail}</strong> 

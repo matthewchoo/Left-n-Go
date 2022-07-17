@@ -1,6 +1,7 @@
 import React from 'react'
 import { useCollection } from "../hooks/useCollection";
 
+
 export default function BasketAdmin() {
 
     const q = ["userType", "!=", "Admin"];
@@ -28,9 +29,8 @@ export default function BasketAdmin() {
                             Type: {x.userType}
                         </h4>
                             
-                        
+
                     </h3> 
-                    
                     </h2>
                     </div>
                 )

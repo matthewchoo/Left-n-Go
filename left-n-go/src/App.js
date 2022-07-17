@@ -65,13 +65,13 @@ function App() {
         <div className="content">
           <Switch>
             <Route exact path="/">
-              <Home products={ products }/>
+              { (userType !== "Vendor" && userType !== "Admin") && <Home products={products} /> }
               { user && userType === "Admin" && <HomeAdmin /> }
               { user && userType === "Vendor" && <HomeVendor products={ products }/> }
               {/* <Home /> */}
             </Route>
             <Route path="/home">
-              <Home products={ products }/>
+              { (userType !== "Vendor" && userType !== "Admin") && <Home products={products} /> }
               { user && userType === "Admin" && <HomeAdmin /> }
               { user && userType === "Vendor" && <HomeVendor products={ products }/> }
               {/* <Home /> */}

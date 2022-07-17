@@ -5,11 +5,18 @@ import Display from "../components/Display";
 import { Link } from 'react-router-dom';
 import { doc, deleteDoc } from "firebase/firestore";
 import {  firestore } from "../config/firebaseConfig";
-
+import { useCollection } from "../hooks/useCollection";
+import { useAuth } from "../hooks/useAuth";
 
 const DeleteProduct = (props) => {
 
-    const products = props.products;
+    const { user, userType} = useAuth();
+    const q = ["vendorMail", "==", user.email];
+
+    const { documents: productsFetched } = useCollection("products", q);
+    const { documents: allProductsFetched } = useCollection("products");
+    const productType = userType === 'Vendor' ? productsFetched : allProductsFetched
+
 
 
     const [foodID, setID] = useState('');
@@ -157,7 +164,7 @@ const DeleteProduct = (props) => {
 	</div>
         <aside className="block col-1">
             <h1>Your Listings:</h1>
-            <Display products={products}></Display>
+            <Display products={productType}></Display>
 
         </aside>
     </div>

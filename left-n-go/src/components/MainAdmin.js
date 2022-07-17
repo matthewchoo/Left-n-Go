@@ -17,12 +17,12 @@ export default function MainAdmin(props) {
             {   ordersFetched.map( (x) => {
                 const a = x.name
                 const boxColour = x.completed ? 'green' : 'blue'
-                const checker = x.completed ? 'Collected:' : '[Paid] To Collect:'
+                const checker = x.completed ? 'Collected:' : 'Not Collected Yet:'
                 return(
                     <div className={"ordersBox" + boxColour} key={x.id}>
                     <strong>Order No: {x.id}</strong>
                     <div>
-                    <strong>{checker} from {x.vendorMail} </strong>
+                    <strong>{checker} by {x.vendorMail} </strong>
                     </div>
                     <div>
                     <strong> Sold to {x.cusMail}</strong> 

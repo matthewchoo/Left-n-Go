@@ -7,11 +7,14 @@ import { Link } from 'react-router-dom';
 import { doc, runTransaction } from "firebase/firestore";
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable  } from "firebase/storage";
 import { storage, firestore } from "../config/firebaseConfig";
+import { useCollection } from "../hooks/useCollection";
+import { useAuth } from "../hooks/useAuth";
+
 
 
 const UpdateProduct = (props) => {
 
-    const products = props.products;
+    
 
     const [ name, setName ] = useState('');
     const [ description, setDescription ] = useState('');
@@ -26,6 +29,14 @@ const UpdateProduct = (props) => {
     const [ isLoading, setIsLoading ] = useState(false)
     const [ msg, setMsg ] = useState(null);
 
+    const { user, userType } = useAuth();
+
+    const q = ["vendorMail", "==", user.email];
+
+    const { documents: productsFetched } = useCollection("products", q);
+    const { documents: allProductsFetched } = useCollection("products");
+    const productType = userType === 'Vendor' ? productsFetched : allProductsFetched
+    
     // console.log(name + " " + description + 
     // " " + price + " " + quantity);
 
@@ -362,7 +373,7 @@ const UpdateProduct = (props) => {
 	</div>
         <aside className="block col-1">
             <h1>Your Listings:</h1>
-            <Display products={products}></Display>
+            <Display products={productType}></Display>
 
         </aside>
     </div>
