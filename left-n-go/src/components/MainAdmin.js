@@ -27,12 +27,11 @@ export default function MainAdmin(props) {
                     <div>
                     <strong> Sold to {x.cusMail}</strong> 
                     </div>
-                    <h3>{a}</h3>
-                        <h4>
-                            Qty: {x.quantity}
-                        </h4>
-                    <h2 ><img className="wrap" src={ x.imageURL } alt={x.name}></img>
-                    </h2>
+                    <h3>{a} <br />
+                        Qty: {x.quantity}
+                    </h3>
+                    <img className="wrap" src={ x.imageURL } alt={x.name}></img>
+                    
                     </div>
                 )
 

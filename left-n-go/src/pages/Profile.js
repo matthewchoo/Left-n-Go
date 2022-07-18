@@ -11,7 +11,7 @@ import { useProvideAuth } from "../hooks/useProvideAuth";
 
 const Profile = () => {
     const { user, userType } = useAuth();
-    const { error, changeEmail, changePassword } = useProvideAuth()
+    const { changeEmail, changePassword } = useProvideAuth()
     // const [ errMsg, setErrMsg ] = useState(error)
 
     const handleEmailChange = (newEmail) => {

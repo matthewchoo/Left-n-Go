@@ -1,9 +1,9 @@
-import React, { useEffect, useContext, createContext, useReducer, useRef } from "react";
+import React, { useEffect, useContext, createContext, useReducer } from "react";
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig, firestore } from "../config/firebaseConfig";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { doc, getDoc } from "firebase/firestore";
-import { useMemo } from "react";
+// import { useMemo } from "react";
 // import ( firebaseConfig ) from "../config/firebaseConfig";
 // import { getAuth, GoogleAuthProvider, signInWithPopup, GithubAuthProvider, 
 //     signOut, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged  } from "firebase/auth";

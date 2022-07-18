@@ -20,18 +20,12 @@ export default function BasketAdmin() {
                 
                 return(
                     <div className={"ordersBox" + boxColour} key={x.uid}>
-                    <strong>Account ID: {x.uid}</strong>
-                    <h2 >
-                    <h3 >
-                        <h4>
-                            Email: {x.email}
+                        <strong>Account ID: {x.uid}</strong>
+                        <div>
+                            <h3>Email: {x.email}</h3>
                             <hr></hr>
-                            Type: {x.userType}
-                        </h4>
-                            
-
-                    </h3> 
-                    </h2>
+                            <h4>Type: {x.userType}</h4>
+                        </div>
                     </div>
                 )
 
