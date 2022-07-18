@@ -82,6 +82,10 @@ function App() {
               { !user ? <Redirect to="/home"/> : <Cart orders = {orders}/> }
             </Route>
 
+            <Route path="/orders">
+              { !user ? <Redirect to="/home"/> : <Cart orders = {orders}/> }
+            </Route>
+
             {/* If there is an user, redirect to home */}
             <Route path="/login">
               { user ? <Redirect to="/home"/> : <Login /> }

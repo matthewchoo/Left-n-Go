@@ -117,7 +117,7 @@ export default function Navbar(props) {
             <div className="link">
                     {/* Cust Navbar */}
                     { (user && userType === "Cust") && 
-                        <Link to="/cart">Orders {' '}
+                        <Link to="/orders">Orders {' '}
                             {countCartItems ? ( 
                                 <button className="badge">{ countCartItems }</button>
                             ): ''}
