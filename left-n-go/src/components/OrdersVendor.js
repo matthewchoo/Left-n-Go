@@ -52,7 +52,7 @@ export default function OrdersVendor() {
                 <br></br>
                 <img className="wrap"  src={ x.imageURL } alt={x.name}></img>
                 
-
+                <p>Order ID: { x.id }</p>
                 <aside>{a} | Qty: {x.quantity}
                 
                 <br></br>

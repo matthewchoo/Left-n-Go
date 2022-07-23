@@ -39,6 +39,7 @@ const Cart = (props) => {
                     
                     <h2 ><img className="wrap" src={ x.imageURL } alt={x.name}></img>
                     <p style={{display:"inline"}} className="cartText">
+                        Order ID: { x.id } <br />
                         {a} <br />  
                         Qty: {x.quantity}
                     </p> 
