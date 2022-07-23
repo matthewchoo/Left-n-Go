@@ -65,7 +65,8 @@ export function useProvideAuth() {
         createUserWithEmailAndPassword(auth, email, password)
           .then((response) => {
             // dispatch({ type: 'LOGIN', payload: response.user, userType: "User" })
-            dispatch({ type: 'LOGIN', payload: response.user, userType: userType })
+            setError("Success")
+            // dispatch({ type: 'LOGIN', payload: response.user, userType: userType })
             setUser(response.user)
             const data = {
                 uid : response.user.uid,
@@ -141,6 +142,12 @@ export function useProvideAuth() {
         .then((response) => {
             dispatch({ type: 'LOGIN', payload: response.user, userType: "Cust" })
             setUser(response.user)
+            const data = {
+              uid : response.user.uid,
+              email : response.user.email,
+              userType : "Cust",
+            }
+            saveItem(response.user.uid, data)
         })
         .catch((err) => {
             setError(err.message)
