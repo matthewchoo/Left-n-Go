@@ -22,7 +22,7 @@ export default function Main(props) {
                 
                 <div className="product-info">
                     <h3>{ product.name }</h3>
-                    
+                    <p> Qty Available: { product.quantity }</p>
                     <h4>${ product.price }</h4>
                 </div>
                 <div>
