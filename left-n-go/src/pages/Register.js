@@ -62,7 +62,7 @@ const Register = () => {
             // console.log("(submit) The email is : ", emailValues.email)
             // console.log("(submit) The password is : ", passValues.password)
             // console.log("(submit) The confirmPass is : ", confirmPass)
-            
+
             signup(emailValues.email, passValues.password, userType);
             // If signup success, there will not be any error messages, user
             // will be redirected to the homepage upon signup.
@@ -138,7 +138,10 @@ const Register = () => {
                     onChange={(e) => setConfirmPass(e.target.value)}
                     value={confirmPass}
                 />
-                
+
+                <InputLabel htmlFor="confirm-userType" style={{fontSize: "15px"}}>
+                    Select User
+                </InputLabel>
                 <NativeSelect
                         inputProps={{
                         name: 'userType',
