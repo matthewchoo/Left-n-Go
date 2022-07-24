@@ -8,8 +8,9 @@ export default function MainVendor(props) {
     
     const q = ["vendorMail", "==", user.email];
 
-    const { documents: productsFetched } = useCollection("products", q);
-    const ownProducts = productsFetched
+    const { documents: ownProducts } = useCollection("products", q);
+    // const { documents: productsFetched } = useCollection("products", q);
+    // const ownProducts = productsFetched
 
     const listd = ownProducts.length > 1 ? "Listings" : "Listing"
 
