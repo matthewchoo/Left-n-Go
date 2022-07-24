@@ -20,7 +20,7 @@ const UpdateProduct = (props) => {
     const [ description, setDescription ] = useState('');
     const [ price, setPrice ] = useState('');
     const [ quantity, setQuantity ] = useState(1);
-    const [foodID, setID] = useState('');
+    const [ foodID, setID ] = useState('');
     
     const [ imageAsset, setImageAsset ] = useState(null);
     const [ imageName, setImageName ] = useState('');
@@ -52,11 +52,10 @@ const UpdateProduct = (props) => {
                 
                 transaction.update(sfDocRef, { description: data.description, name: data.name,
                 imageURL : data.imageURL, quantity: data.quantity, price: data.price});
-
             });
-            console.log("Transaction successfully committed!");
+            // console.log("Transaction committed successfully.");
         } catch (e) {
-            console.log("Transaction failed: ", e);
+            console.log("Transaction failed: ", e);     
         }
 
         
