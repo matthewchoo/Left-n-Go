@@ -37,7 +37,7 @@ const DeleteProduct = (props) => {
 
     const delDetails = () => { 
         try {
-            if( (!foodID ) ) {
+            if( (!foodID) ) {
                 setFields(true);
                 setMsg("Required fields can't be empty");
                 //setAlertStatus('danger');
@@ -60,7 +60,7 @@ const DeleteProduct = (props) => {
 
                 setTimeout(() => {
                     setFields(false);
-                }, 1000); //4000 originally
+                }, 4000); //4000 originally
             }
 
 

@@ -18,7 +18,7 @@ const Profile = () => {
         changeEmail(newEmail)
 
         const docRef = doc(firestore, 'users', user.uid)
-                console.log("docRef: ", docRef)
+            //console.log("docRef: ", docRef)
 
         updateDoc(docRef, {
             email: newEmail
