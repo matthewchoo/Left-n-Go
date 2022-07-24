@@ -177,7 +177,8 @@ const UpdateProduct = (props) => {
         )}
 
         { isLoading && ( 
-                <h1 style={{color: "red"}} >Uploading image...</h1>
+                // <h1 style={{color: "red"}} >Uploading image...</h1>
+                <h1 style={{color: "red"}} >Loading...</h1>
         )}
 
         <form>
