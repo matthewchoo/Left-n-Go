@@ -69,7 +69,7 @@ return (
         <h2>Welcome Back</h2>
         <p>Login with your email & password</p>
 
-        { error && <p>{ error }</p>}
+        { error && <p style={{color: "red"}} >{ error }</p>}
 
         <form onSubmit={handleSubmit}>
             {/* For Email */}
