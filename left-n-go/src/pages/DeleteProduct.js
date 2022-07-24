@@ -102,8 +102,8 @@ const DeleteProduct = (props) => {
                 marginBottom: "15px",
                 textAlign: "center"}} 
 
-                label="Food ID" 
-                placeholder="Enter Food ID" 
+                label="Product ID" 
+                placeholder="Enter Product ID" 
                 variant="outlined"
                 required
                 
