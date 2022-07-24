@@ -66,7 +66,7 @@ export function useProvideAuth() {
           .then((response) => {
             // dispatch({ type: 'LOGIN', payload: response.user, userType: "User" })
             setError("Success")
-            // dispatch({ type: 'LOGIN', payload: response.user, userType: userType })
+            dispatch({ type: 'LOGIN', payload: response.user, userType: userType })
             setUser(response.user)
             const data = {
                 uid : response.user.uid,
