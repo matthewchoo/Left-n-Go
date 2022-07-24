@@ -51,7 +51,7 @@ export default function Basket(props) {
             completed: false,
             cusMail : user.email
         }
-        console.log("hi");
+        // console.log("hi");
         saveOrder(orderData);
         
         let nData = {
@@ -67,9 +67,9 @@ export default function Basket(props) {
 
         //console.log(exist.qty);
         const checkID = data.id;
-        console.log(checkID);
-        console.log(data.id);
-        console.log(data.qty);
+        // console.log(checkID);
+        // console.log(data.id);
+        // console.log(data.qty);
         products.map((x) =>
             x.id === checkID ? nData.quantity = x.quantity - data.qty : x 
         );
@@ -98,7 +98,7 @@ export default function Basket(props) {
                 imageURL : data.imageURL, quantity: data.quantity, price: data.price, vendorMail: data.vendorMail});
 
             });
-            console.log("Transaction successfully committed!");
+            // console.log("Transaction successfully committed!");
         } catch (e) {
             console.log("Transaction failed: ", e);
         }

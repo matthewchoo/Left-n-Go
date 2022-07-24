@@ -9,7 +9,7 @@ export default function OrdersVendor() {
     //**un comment bottom three lines when routing fixed for vendors */
     const { user } = useAuth();
     const q = ["vendorMail", "==", user.email];
-    const { documents: ordersFetched } = useCollection("orders",q);
+    const { documents: ordersFetched } = useCollection("orders", q);
     
     
     const markComplete = async (data) => {
@@ -26,7 +26,7 @@ export default function OrdersVendor() {
               imageURL : data.imageURL, quantity: data.quantity, price: data.price, vendorMail: data.vendorMail});
 
           });
-          console.log("Transaction successfully committed!");
+          // console.log("Transaction successfully committed!");
       } catch (e) {
           console.log("Transaction failed: ", e);
       }
