@@ -166,11 +166,10 @@ export default function Basket(props) {
                             <hr></hr>
                         </ModalHeader>
                         <ModalBody>
-                            
-
                             {cartItems.map((item) => (
                             <div key={item.id} className = "rowBasket">
                             <div className="col-2 text-left"><img className="smallest" src={ item.imageURL } alt={item.name}></img> {item.name} : {item.qty} x ${item.price}</div>
+                            
                             </div>
                             ))}
                             
