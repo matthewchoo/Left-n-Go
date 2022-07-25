@@ -80,7 +80,9 @@ const AddProduct = () => {
         });
     };
     
-    const saveDetails = () => { 
+    const saveDetails = (e) => { 
+        e.preventDefault()
+        
         try {
             if( (!name || !description || !quantity || !price || !imageAsset ) ) {
                 setFields(true);
@@ -89,6 +91,15 @@ const AddProduct = () => {
                 setTimeout(() => {
                     setFields(false);
                 }, 4000) //4000 originally
+
+            } else if (price <= 0) {
+                setFields(true)
+                setMsg("Please enter a valid price!")
+
+                setTimeout(() => {
+                    setFields(false);
+                }, 4000) //4000 originally
+
             } else {
                 const data = {
                     id : `${Date.now()}`,
