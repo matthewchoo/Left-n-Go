@@ -1,10 +1,13 @@
 import { Box, Button, Modal } from "@mui/material";
 import { doc, updateDoc } from "firebase/firestore";
+import { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import UpdateAddr from "../components/UpdateAddr";
 import UpdateDetails from "../components/UpdateDetails";
 import { firestore } from "../config/firebaseConfig";
 import { useAuth } from "../hooks/useAuth";
+import { useCollection } from "../hooks/useCollection";
 import { useProvideAuth } from "../hooks/useProvideAuth";
 //import { useState } from "react";
 //import { IconButton, InputLabel, Input, InputAdornment, Button } from '@mui/material';
@@ -12,7 +15,6 @@ import { useProvideAuth } from "../hooks/useProvideAuth";
 const Profile = () => {
     const { user, userType } = useAuth();
     const { changeEmail, changePassword } = useProvideAuth()
-    // const [ errMsg, setErrMsg ] = useState(error)
 
     const handleEmailChange = (newEmail) => {
         changeEmail(newEmail)
@@ -79,6 +81,33 @@ const Profile = () => {
         setOpen(false);
     }
 
+    //Email
+    const [ vendAddr, setVendAddr ] = useState("")
+    const queryForAddr = [ "uid", "==", user.uid ]
+    const { documents: userFetched } = useCollection("users", queryForAddr)
+    const [addrOpen, setAddrOpen] = useState(false);
+    // const vendAddr = 
+
+    // Fetch the vendors' address upon changes in userFetched
+    // If there is a user, then set address
+    useEffect(() => {
+        // console.log(userFetched)
+
+        if (userFetched.length !== 0) {
+            setVendAddr(userFetched[0].addr)
+        }
+        // console.log(vendAddr)
+    }, [userFetched])
+
+    //Open Email Modal
+    const handleAddrOpen = () => {
+        setAddrOpen(true);
+    }
+
+    //Close Email Modal
+    const handleAddrClose = () => {
+        setAddrOpen(false);
+    }
 
     const style = {
         position: 'absolute',
@@ -109,6 +138,7 @@ const Profile = () => {
 
             {/* { error && <h3 style={{color: "red"}}>{ error }</h3>} */}
 
+            {/* Email */}
             <div className="user-email-profile">
                 <h1>Email: { user.email }</h1>
                 <Button 
@@ -133,6 +163,33 @@ const Profile = () => {
                 {/* <h1>Password:  </h1> */}
                 
             </div>
+
+            {/* Change Address */}
+            { (userType === "Vendor" && userFetched) && 
+                <div className="user-address">
+                    <p style={{ fontSize:'20px' }}>Address: { vendAddr }</p>
+                    <Button 
+                        size="large" 
+                        variant="outlined"
+                        style={{marginBottom: '20px', marginTop:'20px'}}
+                        sx={{
+                            width:'25ch',
+                        }}
+                        onClick={handleAddrOpen}
+                        >Change Address</Button>
+                    <Modal
+                        open={addrOpen}
+                        onClose={handleAddrClose}
+                        >
+                        <Box sx={{ ...style, width: 420 }}>
+                            <UpdateAddr />
+                        </Box>
+                    </Modal>
+                </div>
+            }
+
+
+            {/* Change Password */}
             <div className="image-container">
                 <h1>Account Type: { userType === "Cust" ? "Customer" : userType }</h1>
             </div>
