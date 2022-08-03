@@ -182,7 +182,7 @@ const Profile = () => {
                         onClose={handleAddrClose}
                         >
                         <Box sx={{ ...style, width: 420 }}>
-                            <UpdateAddr />
+                            <UpdateAddr addr={ vendAddr } />
                         </Box>
                     </Modal>
                 </div>

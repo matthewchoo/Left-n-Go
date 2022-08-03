@@ -5,7 +5,7 @@ import { firestore } from "../config/firebaseConfig";
 // import { Redirect } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth"
 
-export default function UpdateAddr() {
+export default function UpdateAddr({ addr }) {
     const { user } = useAuth();
 
     const updateAddr = (newAddr) => {
@@ -23,7 +23,7 @@ export default function UpdateAddr() {
         });
     };
 
-    const [ newAddr, setNewAddr ] = useState('')
+    const [ newAddr, setNewAddr ] = useState(addr)
     // const [ confirmAddr, setConfirmAddr ] = useState('')
     const [ warning, setWarning ] = useState('')
     const [ isLoading, setIsLoading ] = useState(false)
@@ -54,7 +54,7 @@ export default function UpdateAddr() {
             <span>Enter new Address: </span>
                 <TextField sx={{width:'20ch'}}
                 id="outlined-multiline-static"
-
+                
                 value={newAddr} 
                 onChange={(e) => setNewAddr(e.target.value)}
                 ></TextField>                   
