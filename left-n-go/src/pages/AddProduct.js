@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 // import { doc, setDoc } from "firebase/firestore";
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable  } from "firebase/storage";
 import { storage, saveItem } from "../config/firebaseConfig";
+import { useCollection } from "../hooks/useCollection";
 
 
 const AddProduct = () => {
@@ -17,7 +18,6 @@ const AddProduct = () => {
     const [ price, setPrice ] = useState('');
     const [ quantity, setQuantity ] = useState(1);
     const { user } = useAuth();
-
     //images
     const [ imageAsset, setImageAsset ] = useState(null);
     const [ imageName, setImageName ] = useState('');
@@ -28,6 +28,13 @@ const AddProduct = () => {
     const [ msg, setMsg ] = useState(null);
     const [ isLoading, setIsLoading ] = useState(false)
 
+    //query for address since address is not global state
+    const queryForAddr = ["email", "==", user.email]
+    const { documents: userFetched} = useCollection("users",queryForAddr)
+
+    
+
+    
     // console.log(name + " " + description + 
     // " " + price + " " + quantity + " " + imageAsset);
 
@@ -108,10 +115,12 @@ const AddProduct = () => {
                     imageURL : imageAsset,
                     quantity : quantity,
                     price : price,
-                    vendorMail: user.email
+                    vendorMail: user.email,
+                    collectionPt: userFetched[0].addr
 
                     //To add in user's email to identify and fetch data
                 }
+                
                 saveItem(data);
 
                 setFields(true);

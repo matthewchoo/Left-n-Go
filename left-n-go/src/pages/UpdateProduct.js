@@ -140,6 +140,7 @@ const UpdateProduct = (props) => {
                     quantity : quantity,
                     price : price,
 
+
                     //To add in user's email to identify and fetch data
                 }
                 saveItem(data);

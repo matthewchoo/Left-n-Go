@@ -49,7 +49,8 @@ export default function Basket(props) {
             price : data.price,
             vendorMail : data.vendorMail,
             completed: false,
-            cusMail : user.email
+            cusMail : user.email,
+            collectionPt: data.collectionPt
         }
         // console.log("hi");
         saveOrder(orderData);
