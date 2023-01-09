@@ -30,7 +30,7 @@ const AddProduct = () => {
 
     //query for address since address is not global state
     const queryForAddr = ["email", "==", user.email]
-    const { documents: userFetched} = useCollection("users",queryForAddr)
+    const { documents: userFetched} = useCollection("users",queryForAddr);
 
     
 
