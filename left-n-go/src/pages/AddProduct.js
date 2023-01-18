@@ -5,7 +5,7 @@ import { useAuth } from "../hooks/useAuth";
 
 import { Link } from 'react-router-dom';
 
-// import { doc, setDoc } from "firebase/firestore";
+//import { doc, setDoc } from "firebase/firestore";
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable  } from "firebase/storage";
 import { storage, saveItem } from "../config/firebaseConfig";
 import { useCollection } from "../hooks/useCollection";
